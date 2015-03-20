@@ -27,8 +27,8 @@ function TOOL.EnableFunc()
 end
 
 TOOL.ExtraCCVars = {
-    extra_num = 0,
-    extra_bool = 0,
+    extra_num = CreateClientConvar("receptacles_extra_num", 0),
+    extra_bool = CreateClientConvar("receptacles_extra_bool", 0),
 }
 
 function TOOL.ExtraCCVarsCP(tool, panel)
