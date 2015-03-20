@@ -1,4 +1,14 @@
 local gmod_version_required = 145;
+
+-- Turn this on to enable spamming your server console.
+local noisy_startup = false; 
+
+local function dbg_print(message)
+	if noisy_startup then
+		print(message)
+	end
+end
+
 if ( VERSION < gmod_version_required ) then
 	error("CAF: Your gmod is out of date: found version ", VERSION, "required ", gmod_version_required)
 end
@@ -7,7 +17,8 @@ local net = net
 
 local net_pools = {"CAF_Addon_Construct", "CAF_Addon_Destruct", "CAF_Start_true", "CAF_Start_false", "CAF_Addon_POPUP"};
 for _, v in pairs(net_pools) do
-    print("Pooling ", v, " for net library");
+    --print("Pooling ", v, " for net library");
+    dbg_print("Pooling "..v.." for net library");
     util.AddNetworkString(v)
 end
 
@@ -268,10 +279,10 @@ function CAF2.Start()
 	net.Broadcast()
 	CAF2.AddServerTag("CAF")
 	for level, tab in pairs(addonlevel) do
-		print("Loading Level "..tostring(level).." Addons\n")
+		dbg_print("Loading Level "..tostring(level).." Addons")
 		for k, v in pairs(tab) do
 			if Addons[v] then
-				print("-->", "Loading addon "..tostring(v).."\n")
+				dbg_print("  --> Loading addon "..tostring(v).."\n")
 				if Addons[v].AddResourcesToSend then
 					local ok, err = pcall(Addons[v].AddResourcesToSend)
 					if not ok then
@@ -295,7 +306,7 @@ function CAF2.Start()
 								CAF2.WriteToDebugFile("CAF_AutoStart", "Couldn't call AutoStart for "..v .. ": " .. err .. "\n")
 							else
 								OnAddonConstruct(v)
-								print("-->", "Auto Started Addon: " .. v.."\n")
+                                dbg_print("  --> Auto Started Addon: " .. v.."\n")
 							end
 						elseif state then 
 							local ok2 , err = pcall(Addons[v].__Construct)
@@ -303,7 +314,7 @@ function CAF2.Start()
 								CAF2.WriteToDebugFile("CAF_Construct", "Couldn't call constructor for "..v .. ": " .. err .. "\n")
 							else
 								OnAddonConstruct(v)
-								print("-->", "Loaded addon: " .. v.."\n")
+                                dbg_print("  --> Loaded addon: " .. v.."\n")
 							end
 						end
 					end
@@ -395,17 +406,11 @@ local kickgarry = false;
 	This function will update the Client with all active addons
 ]]
 function CAF2.PlayerSpawn(ply)
-	if kickgarry then
-		pcall(function()
-			if ply:SteamID() == "STEAM_0:1:7099" then
-				ply:Kick("We don't want you here!");
-			end
-		end);
-	end
-	ply:ChatPrint("This server is using the Custom Addon Framework\n")
-	ply:ChatPrint("Report any bugs during the beta on http://www.snakesvx.net\n")
-	
-	ply:ChatPrint("\n\nIf you have any suggestions for future versions of CAF, SB, LS, RD, ... please report them on http://www.snakesvx.net\n\n")
+    if spam_chat then
+        ply:ChatPrint("This server is using the Custom Addon Framework\n")
+        ply:ChatPrint("Report any bugs during the beta on http://www.snakesvx.net\n")
+        ply:ChatPrint("\n\nIf you have any suggestions for future versions of CAF, SB, LS, RD, ... please report them on http://www.snakesvx.net\n\n")
+    end
 	timer.Simple(1, function()
 		for k, v in pairs(Addons) do
 			if v.GetStatus and v.GetStatus() then
@@ -419,7 +424,6 @@ function CAF2.PlayerSpawn(ply)
 	ply:ChatPrint("\n\nNOTE: If you encounter any issues with RD3.1 (alpha) report them on http://www.snakesvx.net!!!!!\n\n")
 end
 hook.Add( "PlayerInitialSpawn", "CAF_In_Spawn", CAF2.PlayerSpawn )
-
 
 local oldcreate = ents.Create
 

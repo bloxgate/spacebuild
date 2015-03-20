@@ -91,8 +91,12 @@ end
 	The Constructor for this Custom Addon Class
 ]]
 function LS.__Construct()
-	if status then return false , CAF.GetLangVar("This Addon is already Active!") end
-	if not CAF.GetAddon("Resource Distribution") or not CAF.GetAddon("Resource Distribution").GetStatus() then return false, CAF.GetLangVar("Resource Distribution is Required and needs to be Active!") end
+	if status then
+        return false , CAF.GetLangVar("This Addon is already Active!")
+    end
+	if not CAF.GetAddon("Resource Distribution") or not CAF.GetAddon("Resource Distribution").GetStatus() then
+        return false, CAF.GetLangVar("Resource Distribution is Required and needs to be Active!")
+    end
 	util.PrecacheSound( "vehicles/v8/skid_lowfriction.wav" )
 	util.PrecacheSound( "NPC_Stalker.BurnFlesh" )
 	util.PrecacheModel("models/player/charple01.mdl")
