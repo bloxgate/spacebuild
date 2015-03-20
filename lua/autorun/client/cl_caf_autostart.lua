@@ -50,8 +50,8 @@ hooks["OnAddonConstruct"] = {}
 hooks["OnAddonExtraOptionChange"] = {}
 
 local function ErrorOffStuff(String)
-	Msg( "----------------------------------------------------------------------\n" )
-	Msg("-----------Custom Addon Management Framework Error----------\n")
+	Msg("----------------------------------------------------------------------\n")
+	Msg("-----------    Custom Addon Management Framework Error      ----------\n")
 	Msg("----------------------------------------------------------------------\n")
 	Msg(tostring(String).."\n")
 end

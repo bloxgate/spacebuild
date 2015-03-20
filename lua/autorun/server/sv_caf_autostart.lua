@@ -1,12 +1,19 @@
 local gmod_version_required = 145;
 
 -- Turn this on to enable spamming your server console.
-local noisy_startup = false; 
+local noisy_startup = false;
+local spam_chat = false;
 
 local function dbg_print(message)
-	if noisy_startup then
-		print(message)
-	end
+    if noisy_startup then
+        print(message)
+    end
+end
+
+local function dbg_Msg(message)
+    if noisy_startup then
+        print(message)
+    end
 end
 
 if ( VERSION < gmod_version_required ) then
@@ -72,10 +79,10 @@ end
 
 
 local function ErrorOffStuff(String)
-	Msg("----------------------------------------------------------------------\n")
-	Msg("-----------Custom Addon Management Framework Error----------\n")
-	Msg("----------------------------------------------------------------------\n")
-	Msg(tostring(String).."\n")
+	dbg_Msg("----------------------------------------------------------------------\n")
+	dbg_Msg("-----------Custom Addon Management Framework Error----------\n")
+	dbg_Msg("----------------------------------------------------------------------\n")
+	dbg_Msg(tostring(String).."\n")
 end
 
 AddCSLuaFile("autorun/client/cl_caf_autostart.lua")
@@ -106,7 +113,7 @@ local function SaveAddonStatus(addon, status)
 	local stat = sql.SQLStr(status)
 	local data = sql.Query("INSERT INTO CAF_AddonStatus(id, status) VALUES('"..id.."', "..stat..");")
 	if data then 
-		Msg("Error making a profile for "..ply:Nick().."\n"..data.."\n") 
+		Msg("Error making a profile for "..ply:Nick().."\n"..data.."\n")
 	end
 end
 
@@ -194,27 +201,27 @@ end
 --Gmod Spawn Hooks
 
 local function SpawnedSent( ply , ent )
-	--Msg("Sent Spawned\n")
+	--dbg_Msg("Sent Spawned\n")
 	OnEntitySpawn(ent , "SENT" , ply)
 end
 
 local function SpawnedVehicle( ply , ent)
-	--Msg("Vehicle Spawned\n")
+	--dbg_Msg("Vehicle Spawned\n")
 	OnEntitySpawn(ent , "VEHICLE" , ply)
 end	
 
 local function SpawnedEnt( ply , model , ent )
-	--Msg("Prop Spawned\n")
+	--dbg_Msg("Prop Spawned\n")
 	OnEntitySpawn(ent , "PROP" , ply)
 end
 
 local function PlayerSpawn(ply)
-	--Msg("Prop Spawned\n")
+	--dbg_Msg("Prop Spawned\n")
 	OnEntitySpawn(ply , "PLAYER" , ply)
 end
 
 local function NPCSpawn(ply, ent)
-	--Msg("Prop Spawned\n")
+	--dbg_Msg("Prop Spawned\n")
 	OnEntitySpawn(ent , "NPC" , ply)
 end
 hook.Add( "PlayerSpawnedNPC", "CAF NPC Spawn", NPCSpawn )
@@ -273,7 +280,7 @@ end
 		This function loads all the Custom Addons on Startup
 ]]
 function CAF2.Start()
-	Msg("Starting CAF Addons\n");
+	dbg_Msg("Starting CAF Addons\n");
 	CAF2.StartingUp = true
 	net.Start("CAF_Start_true")
 	net.Broadcast()
@@ -401,7 +408,6 @@ local function AddonDestruct(ply, com, args)
 end
 concommand.Add( "CAF_Addon_Destruct", AddonDestruct ) 
 
-local kickgarry = false;
 --[[
 	This function will update the Client with all active addons
 ]]
@@ -485,88 +491,88 @@ CAF = CAF2
 
 local Files = file.Find( "caf/core/server/*.lua" , "LUA")
 for k, File in ipairs(Files) do
-	Msg("Loading: "..File.."...")
+	dbg_Msg("Loading: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/core/server/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Loaded: Successfully\n")
+		dbg_Msg("Loaded: Successfully\n")
 	end
 end
 
 Files = file.Find("CAF/Core/client/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/client/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
 
 Files = file.Find("CAF/Core/shared/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/shared/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
 
 Files = file.Find("caf/languagevars/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/languagevars/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
 
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/languagevars/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
 
 --Main Addon
 local Files = file.Find( "caf/addons/server/*.lua" , "LUA")
 for k, File in ipairs(Files) do
-	Msg("Loading: "..File.."...")
+	dbg_Msg("Loading: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/addons/server/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Loaded: Successfully\n")
+		dbg_Msg("Loaded: Successfully\n")
 	end
 end
 
 Files = file.Find("caf/addons/client/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/addons/client/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
 
 Files = file.Find("caf/addons/shared/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	Msg("Sending: "..File.."...")
+	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/addons/shared/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		Msg("Sent: Successfully\n")
+		dbg_Msg("Sent: Successfully\n")
 	end
 end
