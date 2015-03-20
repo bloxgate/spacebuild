@@ -86,6 +86,8 @@ en["This Addon is already Active!"] = "This Addon is already Active!"
 en["This Addon is already disabled!"] = "This Addon is already disabled!"
 en["Not on a Spacebuild Map!"] = "Not on a Spacebuild Map!"
 
+en["#ResourceNodes"] = "Resource Nodes"
+
 CAF.LANGUAGE["english"] = en;
 
 local en = CAF.LANGUAGE["nederlands"] or {}
@@ -149,7 +151,7 @@ en["CAF: Client has Internet. Enabled Online-Help"] = "CAF: Client heeft Interne
 en["Your version is out of date. Please update to version "] = "Je versie van CAF is niet meer up to date. Update AUB je versie van CAF "
 en["No Description"] = "Geen beschrijving"
 en["Description"] = "Beschrijving"
-en["Installed Addons"] = "Geïnstalleerde Addons"
+en["Installed Addons"] = "Geï¿½nstalleerde Addons"
 en["Info and Help"] = "Informatie en Hulp"
 en["Server Settings"] = "Server Instellingen"
 en["Client Settings"] = "Client Instellingen"

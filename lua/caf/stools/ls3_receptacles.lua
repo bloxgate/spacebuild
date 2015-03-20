@@ -18,8 +18,8 @@ CAFToolSetup.SetLang("Life Support Storage Devices", "Create Storage Devices att
 
 
 TOOL.ExtraCCVars = {
-    extra_num = CreateClientConvar("receptacles_extra_num", 0),
-    extra_bool = CreateClientConvar("receptacles_extra_bool", 0),
+    extra_num = CreateClientConVar("receptacles_extra_num", 0, false, true),
+    extra_bool = CreateClientConVar("receptacles_extra_bool", 0, false, true),
 }
 
 function TOOL.EnableFunc()
