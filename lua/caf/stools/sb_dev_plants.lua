@@ -1,4 +1,3 @@
---[[
 TOOL.Category = "Life Support"
 TOOL.Name = CAF.GetLangVar("#Dev Plants")
 
@@ -72,4 +71,3 @@ TOOL.Devices = {
         },
     },
 }
-]]--

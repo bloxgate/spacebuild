@@ -17,7 +17,7 @@ TOOL.LimitName = "sb_teraformers"
 TOOL.Limit = 30
 TOOL.AdminOnly = true
 
-CAFToolSetup.SetLang("Planet Teraformers", "Create Teraformers attached to any surface.", "Left-Click: Spawn a Device.  Reload: Repair Device.")
+CAFToolSetup.SetLang("Planet Teraformers", "Create terraformers attached to any surface.", "Left-Click: Spawn a Device.  Reload: Repair Device.")
 
 
 TOOL.ExtraCCVars = {
@@ -56,13 +56,13 @@ end
 
 TOOL.Devices = {
     base_terraformer = {
-        Name = "Planet Teraformer",
+        Name = "Planet Terraformer",
         type = "base_terraformer",
         class = "base_terraformer",
         func = gas_generator_func,
         devices = {
             default = {
-                Name = "Basic Teraformer",
+                Name = "Basic Terraformer",
                 model = "models/ce_ls3additional/plants/plantfull.mdl",
             },
         },

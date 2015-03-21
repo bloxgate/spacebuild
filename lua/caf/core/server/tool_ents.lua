@@ -57,7 +57,7 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     model = devinfo.model
 
     -- This is acting fucked (false positives), so we just check for string.
-    -- DarkRP does the same. - N3X
+    -- DarkRP does the same thing. - N3X
     --[[
     if not util.IsValidModel(model) then
         MsgAll('Invalid model: '..model)

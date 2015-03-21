@@ -508,7 +508,8 @@ end
 function CAFTool.Think( self )
 	local model = self.Model or self:GetClientInfo( "model" )
 
-    if (not model) or (model == nil) or (model == "") or (not util.IsValidModel(model)) then return end
+    -- util.IsValidModel is broken. - N3X15 3/21/2015
+    if (not model) or (model == nil) or (model == "") --[[or (not util.IsValidModel(model))]] then return end
 
     if not IsValid(self.GhostEntity) or string.lower(model) ~= string.lower(self.GhostEntity:GetModel()) then
 		if self.GetGhostAngle then
