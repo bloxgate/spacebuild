@@ -464,7 +464,10 @@ CAF.RegisterAddon("Resource Distribution", RD, "1")
 
 ]]
 function RD.RemoveRDEntity(ent)
-	if not ent or not IsValid(ent) then return end
+	if not ent or not IsValid(ent) then
+        CAFLog.Error("Invalid entity "..tostring(ent))
+        return
+    end
 	if ent.IsNode then
 		--RemoveNetWork(ent.netid)
 		--nettable[ent.netid].clear = true

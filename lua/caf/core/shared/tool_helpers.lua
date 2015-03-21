@@ -360,7 +360,12 @@ function CAFTool.LeftClick( self, trace )
 	if self.ToolMakeEnt then --like wire
 
 		ent = self:ToolMakeEnt( trace, ply )
-		if ent == true then return true end
+		if ent == true then
+            return true
+        end
+        if ent and not ent:IsValid() then
+            CAFLog.Error("CAFTool.LeftClick(): Something went wrong, ent is invalid.")
+        end
 		if ent == nil or ent == false or not ent:IsValid() then return false end
 
 	else
@@ -384,22 +389,23 @@ function CAFTool.LeftClick( self, trace )
 			local sub_type		= self:GetClientInfo('sub_type')
 
 			if not type or type == '' then
-				ErrorNoHalt("RD: GetClientInfo('type') is nil!\n")
+				CAFTool.Error("RD: GetClientInfo('type') is nil!\n")
 				return false
 			end
 
 			ent = self.MakeFunc( ply, Ang, trace.HitPos, nil, type, sub_type, nil, Frozen, Extra_Data )
 
 		elseif self.MakeFunc then
-		MsgN("self.MakeFunc")
+		    CAFLog.Debug("self.MakeFunc")
 			ent = self.MakeFunc( ply, Ang, trace.HitPos, Frozen, Extra_Data )
 
 		else
-		MsgN("no MakeFunc")
+            CAFLog.Debug("no MakeFunc")
 			return false
 		end
 
 		if not ent or not ent:IsValid() then
+            CAFLog.Error("CAFTool.LeftClick(): Something went wrong, ent is invalid.")
             return false
         end
 		

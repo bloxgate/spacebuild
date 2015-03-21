@@ -13,22 +13,31 @@ if ( CLIENT ) then
 end
 
 function TOOL:LeftClick( trace )
-	if ( !trace.Entity:IsValid() ) then return false end
-	if (CLIENT) then return true end
+    if (CLIENT) then return true end
+	if (not trace.Entity:IsValid() ) then
+        MsgAll("Selected entity is invalid!")
+        return false
+    end
 	CAF.GetAddon("Resource Distribution").PrintDebug(trace.Entity)
 	return true
 end
 
 function TOOL:RightClick( trace )
-	if ( !trace.Entity:IsValid() ) then return false end
 	if (SERVER) then return true end
+    if (not trace.Entity:IsValid() ) then
+        MsgAll("Selected entity is invalid!")
+        return false
+    end
 	CAF.GetAddon("Resource Distribution").PrintDebug(trace.Entity)
 	return true
 end
 
 function TOOL:Reload( trace )
-	if ( !trace.Entity:IsValid() ) then return false end
-	if (CLIENT) then return true end
+    if (CLIENT) then return true end
+    if (not trace.Entity:IsValid() ) then
+        MsgAll("Selected entity is invalid!")
+        return false
+    end
 	--for something else
 	return true
 end

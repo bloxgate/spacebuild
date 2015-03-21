@@ -125,7 +125,7 @@ end
 --CAF_AddStoolItem('cdsweapons', "Heat Gun", 'models/props_junk/TrafficCone001a.mdl', 'gun_heat')
 function CAF_AddStoolItem( ToolName, EntPrintName, EntModel, EntClass, EntMakeFunct, MakeCAFEntSupFunction )
 	if not (ToolName and EntPrintName and EntModel and EntClass) then 
-		--Msg('Error when calling CAF_AddStoolItem -- ToolName: -'..tostring(ToolName)..'- EntPrintName: -'..tostring(EntPrintName)..'- Model: -'..tostring(Model)..'- EntClass: -'..tostring(EntClass)..'-\n')
+		CAFLog.Error('Error when calling CAF_AddStoolItem -- ToolName: -'..tostring(ToolName)..'- EntPrintName: -'..tostring(EntPrintName)..'- Model: -'..tostring(Model)..'- EntClass: -'..tostring(EntClass)..'-\n')
 		return 
 	end
 	
@@ -217,8 +217,7 @@ end
 
 if ( SERVER ) then 
 	function CAF_ToolLeftClick( tool, trace, ToolName )
-        -- DEBUG - N3X
-        --Msg("Got CAF_ToolLeftClick from "..ToolName)
+        CAFLog.Debug("Got CAF_ToolLeftClick from "..ToolName)
 
         local FuncListName = ToolName.."_Funcs"
 		local ply = tool:GetOwner()
@@ -258,14 +257,16 @@ end
 if (game.SinglePlayer() and SERVER) or (not game.SinglePlayer() and CLIENT) then --server side in singleplayer, client side in multiplayer
 	function CAF_UpdateToolGhost( tool, model, min, GetOffset, offset )
 		local model = model or tool:GetClientInfo('model')
-		if (model == '') then return end
+		if (model == '') then
+            return
+        end
 		
-		if (!tool.GhostEntity or !tool.GhostEntity:IsValid() or tool.GhostEntity:GetModel() ~= model) then
+		if (not tool.GhostEntity --[[or not tool.GhostEntity:IsValid()]] or tool.GhostEntity:GetModel() ~= model) then
 			tool:MakeGhostEntity( model, Vector(0,0,0), Angle(0,0,0) )
 		end
 		
-		if ( !tool.GhostEntity ) then return end
-		if ( !tool.GhostEntity:IsValid() ) then return end
+		if ( not tool.GhostEntity ) then return end
+		--if ( !tool.GhostEntity:IsValid() ) then return end
 		
 		local tr = util.GetPlayerTrace( tool:GetOwner(), tool:GetOwner():GetAimVector() )
 		local trace = util.TraceLine( tr )
