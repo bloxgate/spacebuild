@@ -42,7 +42,7 @@ function ENT:DoNormalDraw( bDontDrawModel )
 	end
 	if ( EyePos():Distance( self:GetPos() ) < rd_overlay_dist and mode ~= 0 ) and ( (mode ~= 1 and not string.find(self:GetModel(),"s_small_res") ) or LocalPlayer():GetEyeTrace().Entity == self) then
 		local trace = LocalPlayer():GetEyeTrace()
-		if ( !bDontDrawModel ) then self:DrawModel() end
+		if ( not bDontDrawModel ) then self:DrawModel() end
 		local netid = self:GetNetworkedInt("netid")
 		local nettable = CAF.GetAddon("Resource Distribution").GetNetTable(netid)
 		
@@ -227,7 +227,7 @@ function ENT:DoNormalDraw( bDontDrawModel )
 			cam.End3D2D()
 		end
 	else
-		if ( !bDontDrawModel ) then self:DrawModel() end
+		if ( not bDontDrawModel ) then self:DrawModel() end
 	end
 end
 

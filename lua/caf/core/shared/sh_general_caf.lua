@@ -110,7 +110,7 @@ end
 
 --[[
 	This function can be called to register a Hook (similar to Hook.add)
-	Possibly Hooks are:
+	Possible Hooks are:
 		think: Just like the default Think Hook
 		think2: Updates every 0.5 seconds
 		think3: Updates every Second

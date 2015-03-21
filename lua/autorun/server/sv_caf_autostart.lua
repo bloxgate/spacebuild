@@ -500,7 +500,7 @@ for k, File in ipairs(Files) do
 	end
 end
 
-Files = file.Find("CAF/Core/client/*.lua", "LUA")
+Files = file.Find("caf/core/client/*.lua", "LUA")
 for k, File in ipairs(Files) do
 	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/client/"..File)
@@ -511,7 +511,7 @@ for k, File in ipairs(Files) do
 	end
 end
 
-Files = file.Find("CAF/Core/shared/*.lua", "LUA")
+Files = file.Find("caf/core/shared/*.lua", "LUA")
 for k, File in ipairs(Files) do
 	dbg_Msg("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/shared/"..File)

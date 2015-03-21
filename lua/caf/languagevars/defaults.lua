@@ -86,7 +86,7 @@ en["This Addon is already Active!"] = "This Addon is already Active!"
 en["This Addon is already disabled!"] = "This Addon is already disabled!"
 en["Not on a Spacebuild Map!"] = "Not on a Spacebuild Map!"
 
-en["#ResourceNodes"] = "Resource Nodes"
+en["#Resource Nodes"] = "Resource Nodes"
 
 CAF.LANGUAGE["english"] = en;
 

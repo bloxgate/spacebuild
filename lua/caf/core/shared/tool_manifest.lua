@@ -19,7 +19,7 @@ local files = {
     "valves"
 }
 
-for key, val in pairs(file.Find("CAF/Stools/*.lua", "LUA")) do
+for key, val in pairs(file.Find("caf/stools/*.lua", "LUA")) do
 	local s_toolmode = string.sub(val, 0, -5)
 	
 	MsgN("\tloading stool: ",val)
