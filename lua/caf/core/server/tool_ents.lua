@@ -32,7 +32,10 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     end
 
     type = type or class
-    if not type or not (sub_type or model) then return false end
+    if not type or not (sub_type or model) then
+        MsgAll('Type, subtype, or model are nil.')
+        return false
+    end
 
     local devinfo
     if not sub_type and tool.Devices[type] and tool.Devices[type].models and tool.Devices[type].models[model] then
@@ -53,7 +56,10 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     class = devinfo.class
     model = devinfo.model
 
-    if not util.IsValidModel(model) or not util.IsValidProp(model) then return false end
+    if not util.IsValidModel(model) or not util.IsValidProp(model) then
+        MsgAll('Invalid model: '..model)
+        return false
+    end
 
 
     local ent
