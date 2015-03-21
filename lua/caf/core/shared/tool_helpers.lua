@@ -59,7 +59,7 @@ function CAFToolSetup.RegEnts()
 
 	local t_devicefiles = file.Find("caf/stools/"..TOOL.Mode.."/*.lua", "LUA")
 	if t_devicefiles then
-		MsgN("CAF Tool: Loading device defs")
+		CAFLog.Debug("CAF Tool: Loading device defs")
 
 		TOOL.DevClasses = TOOL.DevClasses or {}
 		TOOL.Devices	= TOOL.Devices or {}
@@ -67,8 +67,8 @@ function CAFToolSetup.RegEnts()
 		local s_path = "caf/stools/"..TOOL.Mode.."/"
 		for key, val in pairs(t_devicefiles) do
             local s_devtype = string.sub(val, 0, -5)
-			
-			MsgN("\tLoading dev type: ",s_devtype)
+
+            CAFLog.Debug("\tLoading dev type: "..s_devtype)
 			
 			DEVICEGROUP				= {}
 			--DEVICEGROUP.type		= s_devtype --entity class (can be defined differently in sub_types)
@@ -77,7 +77,7 @@ function CAFToolSetup.RegEnts()
 			AddCSLuaFile( s_path..val )
 			include( s_path..val )
 			if DEVICEGROUP.type then
-				if TOOL.Devices[DEVICEGROUP.type] then --gorup exists, add new devices only
+				if TOOL.Devices[DEVICEGROUP.type] then --group exists, add new devices only
 					for sub_type, dev in pairs(DEVICEGROUP.devices) do
 						if not TOOL.Devices[DEVICEGROUP.type].devices[sub_type] then
 							TOOL.Devices[DEVICEGROUP.type].devices[sub_type] = dev

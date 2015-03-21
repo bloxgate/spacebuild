@@ -5,6 +5,14 @@ if ( VERSION < gmod_version_required ) then
 	error("SB CORE: Your gmod is out of date: found version ", VERSION, "required ", gmod_version_required)
 end
 
+include("caf/core/shared/logging.lua")
+if DEBUG then
+    CAFLog.level = CAFLOG_DEBUG
+else
+    CAFLog.level = CAFLOG_INFO
+end
+CAFLog.Info('CAF Logger set to level '..CAFLog.GetLevelName())
+
 local net = net
 
 --Variable Declarations
@@ -51,10 +59,10 @@ hooks["OnAddonConstruct"] = {}
 hooks["OnAddonExtraOptionChange"] = {}
 
 local function ErrorOffStuff(String)
-	Msg("----------------------------------------------------------------------\n")
-	Msg("-----------    Custom Addon Management Framework Error      ----------\n")
-	Msg("----------------------------------------------------------------------\n")
-	Msg(tostring(String).."\n")
+    CAFLog.Error("----------------------------------------------------------------------")
+    CAFLog.Error("-----------     Custom Addon Management Framework Error     ----------")
+    CAFLog.Error("----------------------------------------------------------------------")
+    CAFLog.Error(tostring(String))
 end
 
 CAF2.CAF3 = CAF3;

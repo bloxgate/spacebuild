@@ -5,28 +5,24 @@ local noisy_startup = false;
 local spam_chat = false;
 local DEBUG = false; -- EVEN WORSE SPAM OH GOD
 
-local function dbg_print(message)
-    if noisy_startup then
-        print(message)
-    end
-end
-
-local function dbg_Msg(message)
-    if noisy_startup then
-        print(message)
-    end
-end
-
 if ( VERSION < gmod_version_required ) then
 	error("CAF: Your gmod is out of date: found version ", VERSION, "required ", gmod_version_required)
 end
+
+include("caf/core/shared/logging.lua")
+if DEBUG then
+    CAFLog.level = CAFLOG_DEBUG
+else
+    CAFLog.level = CAFLOG_INFO
+end
+CAFLog.Info('CAF Logger set to level '..CAFLog.GetLevelName())
 
 local net = net
 
 local net_pools = {"CAF_Addon_Construct", "CAF_Addon_Destruct", "CAF_Start_true", "CAF_Start_false", "CAF_Addon_POPUP"};
 for _, v in pairs(net_pools) do
     --print("Pooling ", v, " for net library");
-    dbg_print("Pooling "..v.." for net library");
+    CAFLog.Debug("Pooling "..v.." for net library");
     util.AddNetworkString(v)
 end
 
@@ -79,10 +75,10 @@ end
 
 
 local function ErrorOffStuff(String)
-	dbg_Msg("----------------------------------------------------------------------\n")
-	dbg_Msg("-----------Custom Addon Management Framework Error----------\n")
-	dbg_Msg("----------------------------------------------------------------------\n")
-	dbg_Msg(tostring(String).."\n")
+    CAFLog.Error("----------------------------------------------------------------------")
+    CAFLog.Error("-----------     Custom Addon Management Framework Error     ----------")
+    CAFLog.Error("----------------------------------------------------------------------")
+    CAFLog.Error(tostring(String))
 end
 
 AddCSLuaFile("autorun/client/cl_caf_autostart.lua")
@@ -91,9 +87,7 @@ include("caf/core/shared/sh_general_caf.lua")
 CAF2.CAF3 = nil;
 
 if (not sql.TableExists("CAF_AddonStatus")) then
-
 	sql.Query("CREATE TABLE IF NOT EXISTS CAF_AddonStatus ( id VARCHAR(50) PRIMARY KEY , status TINYINT(1));")
-
 end
 
 --function Declarations
@@ -201,27 +195,27 @@ end
 --Gmod Spawn Hooks
 
 local function SpawnedSent( ply , ent )
-	--dbg_Msg("Sent Spawned\n")
+	--CAFLog.Debug("Sent Spawned\n")
 	OnEntitySpawn(ent , "SENT" , ply)
 end
 
 local function SpawnedVehicle( ply , ent)
-	--dbg_Msg("Vehicle Spawned\n")
+	--CAFLog.Debug("Vehicle Spawned\n")
 	OnEntitySpawn(ent , "VEHICLE" , ply)
 end	
 
 local function SpawnedEnt( ply , model , ent )
-	--dbg_Msg("Prop Spawned\n")
+	--CAFLog.Debug("Prop Spawned\n")
 	OnEntitySpawn(ent , "PROP" , ply)
 end
 
 local function PlayerSpawn(ply)
-	--dbg_Msg("Prop Spawned\n")
+	--CAFLog.Debug("Prop Spawned\n")
 	OnEntitySpawn(ply , "PLAYER" , ply)
 end
 
 local function NPCSpawn(ply, ent)
-	--dbg_Msg("Prop Spawned\n")
+	--CAFLog.Debug("Prop Spawned\n")
 	OnEntitySpawn(ent , "NPC" , ply)
 end
 hook.Add( "PlayerSpawnedNPC", "CAF NPC Spawn", NPCSpawn )
@@ -280,16 +274,16 @@ end
 		This function loads all the Custom Addons on Startup
 ]]
 function CAF2.Start()
-	dbg_Msg("Starting CAF Addons\n");
+	CAFLog.Debug("Starting CAF addons...");
 	CAF2.StartingUp = true
 	net.Start("CAF_Start_true")
 	net.Broadcast()
 	CAF2.AddServerTag("CAF")
 	for level, tab in pairs(addonlevel) do
-		dbg_print("Loading Level "..tostring(level).." Addons")
+        CAFLog.Debug(" Loading level "..tostring(level).." addons...")
 		for k, v in pairs(tab) do
 			if Addons[v] then
-				dbg_print("  --> Loading addon "..tostring(v).."\n")
+                CAFLog.Debug("  --> Loading addon "..tostring(v))
 				if Addons[v].AddResourcesToSend then
 					local ok, err = pcall(Addons[v].AddResourcesToSend)
 					if not ok then
@@ -313,7 +307,7 @@ function CAF2.Start()
 								CAF2.WriteToDebugFile("CAF_AutoStart", "Couldn't call AutoStart for "..v .. ": " .. err .. "\n")
 							else
 								OnAddonConstruct(v)
-                                dbg_print("  --> Auto Started Addon: " .. v.."\n")
+                                CAFLog.Debug("   --> Auto Started Addon: " .. v)
 							end
 						elseif state then 
 							local ok2 , err = pcall(Addons[v].__Construct)
@@ -321,7 +315,7 @@ function CAF2.Start()
 								CAF2.WriteToDebugFile("CAF_Construct", "Couldn't call constructor for "..v .. ": " .. err .. "\n")
 							else
 								OnAddonConstruct(v)
-                                dbg_print("  --> Loaded addon: " .. v.."\n")
+                                CAFLog.Debug("   --> Loaded addon " .. v)
 							end
 						end
 					end
@@ -378,9 +372,9 @@ local function AddonConstruct(ply, com, args)
 	end
 	local ok, mes = CAF2.Construct(args[1])
 	if ok then
-		ply:ChatPrint("Addon Succesfully Enabled")
+		ply:ChatPrint("Addon successfully enabled")
 	else
-		ply:ChatPrint("Couldn't Enable the Addon for the following reason: "..tostring(mes))
+		ply:ChatPrint("Couldn't enable the addon for the following reason: "..tostring(mes))
 	end
 end
 concommand.Add( "CAF_Addon_Construct", AddonConstruct ) 
@@ -413,9 +407,8 @@ concommand.Add( "CAF_Addon_Destruct", AddonDestruct )
 ]]
 function CAF2.PlayerSpawn(ply)
     if spam_chat then
-        ply:ChatPrint("This server is using the Custom Addon Framework\n")
-        ply:ChatPrint("Report any bugs during the beta on http://www.snakesvx.net\n")
-        ply:ChatPrint("\n\nIf you have any suggestions for future versions of CAF, SB, LS, RD, ... please report them on http://www.snakesvx.net\n\n")
+        ply:ChatPrint("This server is using the Custom Addon Framework by SnakeVXs\n")
+        ply:ChatPrint("Report any bugs during the beta on http://github.com/N3X15/spacebuild/issues\n")
     end
 	timer.Simple(1, function()
 		for k, v in pairs(Addons) do
@@ -427,7 +420,7 @@ function CAF2.PlayerSpawn(ply)
 		end
 	end)
 	
-	ply:ChatPrint("\n\nNOTE: If you encounter any issues with RD3.1 (alpha) report them on http://www.snakesvx.net!!!!!\n\n")
+	ply:ChatPrint("NOTE: If you encounter any issues with SpaceBuild, please report them at http://github.com/N3X15/spacebuild/issues\n")
 end
 hook.Add( "PlayerInitialSpawn", "CAF_In_Spawn", CAF2.PlayerSpawn )
 
@@ -491,88 +484,88 @@ CAF = CAF2
 
 local Files = file.Find( "caf/core/server/*.lua" , "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Loading: "..File.."...")
+	CAFLog.Debug("Loading: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/core/server/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Loaded: Successfully\n")
+        CAFLog.Debug("Loaded successfully..")
 	end
 end
 
 Files = file.Find("caf/core/client/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/client/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent successfully.")
 	end
 end
 
 Files = file.Find("caf/core/shared/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/core/shared/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent successfully.")
 	end
 end
 
 Files = file.Find("caf/languagevars/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/languagevars/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent: Successfully.")
 	end
 end
 
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/languagevars/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent successfully.")
 	end
 end
 
 --Main Addon
 local Files = file.Find( "caf/addons/server/*.lua" , "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Loading: "..File.."...")
+    CAFLog.Debug("Loading: "..File.."...")
 	local ErrorCheck, PCallError = pcall(include, "caf/addons/server/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Loaded: Successfully\n")
+        CAFLog.Debug("Loaded successfully.")
 	end
 end
 
 Files = file.Find("caf/addons/client/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/addons/client/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent successfully.")
 	end
 end
 
 Files = file.Find("caf/addons/shared/*.lua", "LUA")
 for k, File in ipairs(Files) do
-	dbg_Msg("Sending: "..File.."...")
+    CAFLog.Debug("Sending: "..File.."...")
 	local ErrorCheck, PCallError = pcall(AddCSLuaFile, "caf/addons/shared/"..File)
 	if(not ErrorCheck) then
 		ErrorOffStuff(PCallError)
 	else
-		dbg_Msg("Sent: Successfully\n")
+        CAFLog.Debug("Sent successfully.")
 	end
 end

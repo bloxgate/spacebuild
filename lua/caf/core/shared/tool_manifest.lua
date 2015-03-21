@@ -1,8 +1,6 @@
-
 TOOL = nil
 
-
-MsgN("Loading CAF Tools")
+CAFLog.Debug("Loading CAF Tools...")
 
 include( "tool_helpers.lua" )
 
@@ -14,15 +12,15 @@ local files = {
     "ls3_receptacles",
     "pumps",
     "resourcenodes",
-    "sb_dev_plants",
+    -- Broken as fuck - N3X15 "sb_dev_plants",
     "sb_terraformer",
     "valves"
 }
 
 for key, val in pairs(file.Find("caf/stools/*.lua", "LUA")) do
 	local s_toolmode = string.sub(val, 0, -5)
-	
-	MsgN("\tloading stool: ",val)
+
+    CAFLog.Debug("\tLoading stool: "..val)
 
 	CAFToolSetup.open( s_toolmode )
 	
