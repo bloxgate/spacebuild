@@ -9,7 +9,6 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
         return false
     end
 
-
     --Enable Check
     if tool.EnableFunc then
         if not tool.EnableFunc(ply) then
@@ -56,20 +55,20 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     class = devinfo.class
     model = devinfo.model
 
-    -- This is acting fucked (false positives), so we just check for string.
+    -- These are acting fucked (false positives), so we just check for string.
     -- DarkRP does the same thing. - N3X
     --[[
     if not util.IsValidModel(model) then
-        MsgAll('Invalid model: '..model)
+        MsgAll('Invalid model: '..model..'\n')
         return false
     end
     if not util.IsValidProp(model) then
-        MsgAll('Invalid prop: '..model)
+        MsgAll('Invalid prop: '..model..'\n')
         return false
     end
     ]]--
     if not isstring(model) then
-        MsgAll('model for '..class..' is not a string')
+        MsgAll('model for '..class..' is not a string\n')
         return false
     end
 
@@ -99,21 +98,21 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
         end
     end
     if not CAF.AllowSpawn(type, sub_type, class, model) then
-        MsgAll('CAF.AllowSpawn returned false.')
+        MsgAll('CAF.AllowSpawn returned false.\n')
         return
     end
 
     if devinfo.group.MakeFunc then
         ent = devinfo.group.MakeFunc(tool, ply, Ang, Pos, class, type, sub_type, model, frozen, Extra_Data, devinfo)
         if IsValid(ent) then
-            MsgAll('Invalid MakeFunc entity.')
+            MsgAll('Invalid MakeFunc entity.\n')
             return false
         end
         if devinfo.group.MakeFuncReturn then return ent end
     else
         ent = ents.Create(class)
         if not ent:IsValid() then
-            MsgAll("Invalid ents.Create()'d entity.")
+            MsgAll("Invalid ents.Create()'d entity.\n")
             return false
         end
         ent:SetModel(model)
@@ -135,14 +134,14 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
 
     if devinfo.group.func then
         mass, maxhealth = devinfo.group.func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
-    else
-        Msg('devinfo.group.func not set.')
+    --else
+    --    Msg('devinfo.group.func not set.\n')
     end
 
     if devinfo.func then
         mass, maxhealth = devinfo.func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
-    else
-        Msg('devinfo.func not set.')
+    --else
+    --    Msg('devinfo.func not set.\n')
     end
 
     if devinfo.group.func or devinfo.func then

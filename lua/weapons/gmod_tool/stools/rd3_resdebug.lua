@@ -1,15 +1,14 @@
 
 TOOL.Category		= "Resource Distribution"
 TOOL.Mode 			= "rd3_resdebug"
-TOOL.Name			= "Res. Debuger"
+TOOL.Name			= "Resource Debugger"
 TOOL.Command		= nil
 TOOL.ConfigName		= nil
 if (CLIENT and GetConVarNumber("CAF_UseTab") == 1) then TOOL.Tab = "Custom Addon Framework" end
 
-
 if ( CLIENT ) then
-	language.Add( "tool.rd3_resdebug.name",	"RD Resource Debuger" )
-	language.Add( "tool.rd3_resdebug.desc",	"Spams teh ent's resource table to the console, Left Click = serverside, Right click = Clientside" )
+	language.Add( "tool.rd3_resdebug.name",	"RD Resource Debugger" )
+	language.Add( "tool.rd3_resdebug.desc",	"Spams the ent's resource table to the console, Left Click = serverside, Right click = Clientside" )
 	language.Add( "tool.rd3_resdebugr.0", "Click an RD3 Ent" )
 end
 

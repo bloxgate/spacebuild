@@ -2,7 +2,6 @@
 --	Custom Addon Framework TOOLS HAPPY-FUN TIME-SAVER FUNCTIONS
 --
 
-
 if ( SERVER ) then 
 
 	AddCSLuaFile( "vgui/caf_gui.lua" )
@@ -219,7 +218,7 @@ end
 if ( SERVER ) then 
 	function CAF_ToolLeftClick( tool, trace, ToolName )
         -- DEBUG - N3X
-        Msg("Got CAF_ToolLeftClick from "..ToolName)
+        --Msg("Got CAF_ToolLeftClick from "..ToolName)
 
         local FuncListName = ToolName.."_Funcs"
 		local ply = tool:GetOwner()
