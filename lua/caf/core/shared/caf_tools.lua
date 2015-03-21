@@ -229,7 +229,7 @@ if ( SERVER ) then
 		local AllowWorldWeld		= tool:GetClientNumber('AllowWorldWeld') == 1
 		local DontWeld			= tool:GetClientNumber('DontWeld') == 1
 		local Frozen			= (tool:GetClientNumber('Frozen') == 1) or (AllowWorldWeld and not trace.Entity:IsValid())
-		if (!type or type == '') then
+		if (not type or type == '') then
 			CAF.WriteToDebugFile("caf_tool_error", "CAF: GetClientInfo('type') is nil!\n")
 			return false
 		end

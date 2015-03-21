@@ -1,4 +1,4 @@
-TOOL.Category			= "Resource Distribution"
+TOOL.Category           = "Resource Distribution"
 TOOL.Name				= "#Resource Nodes"
 
 TOOL.DeviceName			= "Resource Node"
@@ -15,7 +15,6 @@ TOOL.LimitName			= "resourcenodes"
 TOOL.Limit				= 30
 
 CAFToolSetup.SetLang("RD Resource Nodes","Create Resource Nodes attached to any surface.","Left-Click: Spawn a Device.  Reload: Repair Device.")
-
 
 TOOL.ExtraCCVars = {
 	auto_link = 0,
@@ -44,7 +43,7 @@ local function link_in_range(ent, range)
 	end
 end
 
-local function resource_node_func(ent,type,sub_type,devinfo,Extra_Data,ent_extras)
+local function resource_node_func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
 	MsgAll("Trying to Spawn Resource Node: "..tostring(type).."\n");
 	local volume_mul = 1 --Change to be 0 by default later on
 	local base_volume = 2958

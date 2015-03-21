@@ -110,10 +110,14 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
 
     if devinfo.group.func then
         mass, maxhealth = devinfo.group.func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
+    else
+        Msg('devinfo.group.func not set.')
     end
 
     if devinfo.func then
         mass, maxhealth = devinfo.func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
+    else
+        Msg('devinfo.func not set.')
     end
 
     if devinfo.group.func or devinfo.func then
