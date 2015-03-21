@@ -21,9 +21,7 @@
       </profile>
     </annotationProcessing>
   </component>
-  <component name="CopyrightManager" default="">
-    <module2copyright />
-  </component>
+  <component name="CopyrightManager" default="" />
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
@@ -163,7 +161,7 @@
             <id />
           </State>
           <State>
-            <id>Spelling</id><
+            <id>Spelling</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -351,4 +349,3 @@
     </states>
   </component>
 </project>
-
