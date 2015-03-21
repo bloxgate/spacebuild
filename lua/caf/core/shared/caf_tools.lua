@@ -12,7 +12,7 @@ if ( SERVER ) then
 	CAF_CallbackFuncs = {}
 	
 	
-	--DO NOT register this function with the duplication, you MUST wrap this function in another one as to add CheckLimit (ther is a generic function to generate these functions below)
+	--DO NOT register this function with the duplication, you MUST wrap this function in another one as to add CheckLimit (there is a generic function to generate these functions below)
 	function CAF_MakeCAFEnt( ply, Ang, Pos, system_type, system_class, model, frozen )
 		
 		local ent = ents.Create( system_class )
@@ -218,8 +218,10 @@ end
 
 if ( SERVER ) then 
 	function CAF_ToolLeftClick( tool, trace, ToolName )
-		
-		local FuncListName = ToolName.."_Funcs"
+        -- DEBUG - N3X
+        Msg("Got CAF_ToolLeftClick from "..ToolName)
+
+        local FuncListName = ToolName.."_Funcs"
 		local ply = tool:GetOwner()
 		local Pos = trace.HitPos
 		local Ang = trace.HitNormal:Angle()
@@ -241,7 +243,7 @@ if ( SERVER ) then
 		--CAF.OnEntitySpawn(ent , "SENT" , ply) --Calls the CAF SentSpawn Hook
 		local const
 		if (!DontWeld) and ( trace.Entity:IsValid() or AllowWorldWeld ) then
-			local const = constraint.Weld(ent, trace.Entity,0, trace.PhysicsBone, 0, true ) --add true to turn DOR on
+			const = constraint.Weld(ent, trace.Entity,0, trace.PhysicsBone, 0, true ) --add true to turn DOR on
 		end
 		
 		undo.Create( ToolName )
@@ -250,7 +252,6 @@ if ( SERVER ) then
 			undo.SetPlayer( ply )
 		undo.Finish()
 		ply:AddCleanup( ToolName, ent )
-		
 		return true
 	end
 end
