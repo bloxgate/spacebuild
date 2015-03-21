@@ -1,3 +1,5 @@
+local DEBUG = false -- SHUT UP
+
 local gmod_version_required = 145;
 if ( VERSION < gmod_version_required ) then
 	error("SB CORE: Your gmod is out of date: found version ", VERSION, "required ", gmod_version_required)
@@ -19,7 +21,6 @@ surface.CreateFont( "GModCAFNotify", {font = "verdana", size = 15, weight = 600}
 
 --nederlands, english
 
-local DEBUG = true
 CAF3.DEBUG = DEBUG;
 local Addons = {}
 CAF3.Addons = Addons

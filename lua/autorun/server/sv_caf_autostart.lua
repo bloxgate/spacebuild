@@ -3,6 +3,7 @@ local gmod_version_required = 145;
 -- Turn this on to enable spamming your server console.
 local noisy_startup = false;
 local spam_chat = false;
+local DEBUG = false; -- EVEN WORSE SPAM OH GOD
 
 local function dbg_print(message)
     if noisy_startup then
@@ -37,7 +38,6 @@ CAF2.CAF3 = CAF3;
 
 CAF2.StartingUp = false;
 
-local DEBUG = true
 CAF3.DEBUG = DEBUG;
 local Addons = {}
 CAF3.Addons = Addons
