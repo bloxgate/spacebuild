@@ -27,9 +27,11 @@ function TOOL.EnableFunc()
 end
 
 TOOL.ExtraCCVars = {
-    extra_num = CreateClientConVar("receptacles_extra_num", 0, false, true),
-    extra_bool = CreateClientConVar("receptacles_extra_bool", 0, false, true),
+    extra_num = 0,
+    extra_bool = 0,
 }
+CreateClientConVar("receptacles_extra_num", "0", false, true)
+CreateClientConVar("receptacles_extra_bool", "0", false, true)
 
 function TOOL.ExtraCCVarsCP(tool, panel)
     panel:NumSlider("Extra Number", "receptacles_extra_num", 0, 10, 0)
