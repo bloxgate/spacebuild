@@ -1,7 +1,7 @@
-list.Set( "PlayerOptionsModel",  "MedicMarine", "models/player/samzanemesis/MarineMedic.mdl" ) 
-list.Set( "PlayerOptionsModel",  "SpecialMarine", "models/player/samzanemesis/MarineSpecial.mdl" ) 
-list.Set( "PlayerOptionsModel",  "OfficerMarine", "models/player/samzanemesis/MarineOfficer.mdl" ) 
-list.Set( "PlayerOptionsModel",  "TechMarine", "models/player/samzanemesis/MarineTech.mdl" ) 
+list.Set( "PlayerOptionsModel",  "MedicMarine", "models/player/samzanemesis/marinemedic.mdl" ) 
+list.Set( "PlayerOptionsModel",  "SpecialMarine", "models/player/samzanemesis/marinespecial.mdl" ) 
+list.Set( "PlayerOptionsModel",  "OfficerMarine", "models/player/samzanemesis/marineofficer.mdl" ) 
+list.Set( "PlayerOptionsModel",  "TechMarine", "models/player/samzanemesis/marinetech.mdl" ) 
 
 local SB = {}
 

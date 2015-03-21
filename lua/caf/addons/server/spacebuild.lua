@@ -1,15 +1,15 @@
 --[[ Serverside Custom Addon file Base ]]--
 --require("sb_space")
 
-player_manager.AddValidModel( "MedicMarine", "models/player/samzanemesis/MarineMedic.mdl" )
-player_manager.AddValidModel( "SpecialMarine", "models/player/samzanemesis/MarineSpecial.mdl" )
-player_manager.AddValidModel( "OfficerMarine", "models/player/samzanemesis/MarineOfficer.mdl" )
-player_manager.AddValidModel( "TechMarine", "models/player/samzanemesis/MarineTech.mdl" )
+player_manager.AddValidModel( "MedicMarine", "models/player/samzanemesis/marinemedic.mdl" )
+player_manager.AddValidModel( "SpecialMarine", "models/player/samzanemesis/marinespecial.mdl" )
+player_manager.AddValidModel( "OfficerMarine", "models/player/samzanemesis/marineofficer.mdl" )
+player_manager.AddValidModel( "TechMarine", "models/player/samzanemesis/marinetech.mdl" )
 
-util.PrecacheModel( "models/player/samzanemesis/MarineMedic.mdl" )
-util.PrecacheModel( "models/player/samzanemesis/MarineSpecial.mdl" )
-util.PrecacheModel( "models/player/samzanemesis/MarineOfficer.mdl" )
-util.PrecacheModel( "models/player/samzanemesis/MarineTech.mdl" )
+util.PrecacheModel( "models/player/samzanemesis/marinemedic.mdl" )
+util.PrecacheModel( "models/player/samzanemesis/marinespecial.mdl" )
+util.PrecacheModel( "models/player/samzanemesis/marineofficer.mdl" )
+util.PrecacheModel( "models/player/samzanemesis/marinetech.mdl" )
 
 local SB = {}
 
@@ -681,13 +681,13 @@ local function ForcePlyModel(ply)
 		if not ply.sbmodel then
 			local i = math.Rand(0, 4)
 			if i <= 1 then
-				ply.sbmodel = "models/player/samzanemesis/MarineMedic.mdl"
+				ply.sbmodel = "models/player/samzanemesis/marinemedic.mdl"
 			elseif i <= 2 then
-				ply.sbmodel = "models/player/samzanemesis/MarineSpecial.mdl"
+				ply.sbmodel = "models/player/samzanemesis/marinespecial.mdl"
 			elseif i <= 3 then 
-				ply.sbmodel = "models/player/samzanemesis/MarineOfficer.mdl"
+				ply.sbmodel = "models/player/samzanemesis/marineofficer.mdl"
 			else --if i <= 4 then
-				ply.sbmodel = "models/player/samzanemesis/MarineTech.mdl"
+				ply.sbmodel = "models/player/samzanemesis/marinetech.mdl"
 			end
 		end
 		ply:SetModel(ply.sbmodel )
@@ -820,10 +820,10 @@ end
 	Optional
 ]]
 function SB.AddResourcesToSend()
-	resource.AddFile( "models/player/samzanemesis/MarineMedic.mdl" )
-	resource.AddFile( "models/player/samzanemesis/MarineSpecial.mdl" )
-	resource.AddFile( "models/player/samzanemesis/MarineOfficer.mdl" )
-	resource.AddFile( "models/player/samzanemesis/MarineTech.mdl" )
+	resource.AddFile( "models/player/samzanemesis/marinemedic.mdl" )
+	resource.AddFile( "models/player/samzanemesis/marinespecial.mdl" )
+	resource.AddFile( "models/player/samzanemesis/marineofficer.mdl" )
+	resource.AddFile( "models/player/samzanemesis/marinetech.mdl" )
 	
 	resource.AddFile( "materials/models/player/male/medic_body.vmt")
 	resource.AddFile( "materials/models/player/male/medic_body_female.vmt")

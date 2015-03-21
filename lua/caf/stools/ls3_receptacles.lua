@@ -588,7 +588,7 @@ TOOL.Devices = {
             },
             medium_phx = {
                 Name = "Medium (Phx)",
-                model = "models/props_phx/life_support/Battery_medium.mdl",
+                model = "models/props_phx/life_support/battery_medium.mdl",
                 skin = 0,
                 legacy = false,
             },
@@ -619,7 +619,7 @@ TOOL.Devices = {
             },
             huge = {
                 Name = "Levy Canister",
-                model = "models/LifeSupport/Storage/CargoCanister.mdl",
+                model = "models/LifeSupport/Storage/cargocanister.mdl",
             },
         },
     },
@@ -679,7 +679,7 @@ TOOL.Devices = {
             },
             huge = {
                 Name = "Levy Canister",
-                model = "models/LifeSupport/Storage/CargoCanister.mdl",
+                model = "models/LifeSupport/Storage/cargocanister.mdl",
             }
         },
     },

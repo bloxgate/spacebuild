@@ -148,11 +148,11 @@ TOOL.Devices = {
 			},
 			small_pipe_T_128 = {
 				Name	= "Small Test pipe T 128",
-				model	= "models/SnakeSVx/small_res_pipe_T_128.mdl",
+				model	= "models/SnakeSVx/small_res_pipe_t_128.mdl",
 			},
 			small_pipe_T2_128 = {
 				Name	= "Small Test pipe T2 128",
-				model	= "models/SnakeSVx/small_res_pipe_T2_128.mdl",
+				model	= "models/SnakeSVx/small_res_pipe_t2_128.mdl",
 			},
 			CS_small_pipe_128 = {
 				Name	= "CS Small straight pipe 128",
