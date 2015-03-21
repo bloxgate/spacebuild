@@ -63,13 +63,13 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
         MsgAll('Invalid model: '..model)
         return false
     end
+    if not util.IsValidProp(model) then
+        MsgAll('Invalid prop: '..model)
+        return false
+    end
     ]]--
     if not isstring(model) then
         MsgAll('model for '..class..' is not a string')
-        return false
-    end
-    if not util.IsValidProp(model) then
-        MsgAll('Invalid prop: '..model)
         return false
     end
 
