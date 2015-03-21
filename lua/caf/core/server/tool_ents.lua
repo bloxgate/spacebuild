@@ -99,16 +99,23 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
         end
     end
     if not CAF.AllowSpawn(type, sub_type, class, model) then
+        MsgAll('CAF.AllowSpawn returned false.')
         return
     end
 
     if devinfo.group.MakeFunc then
         ent = devinfo.group.MakeFunc(tool, ply, Ang, Pos, class, type, sub_type, model, frozen, Extra_Data, devinfo)
-        if IsValid(ent) then return false end
+        if IsValid(ent) then
+            MsgAll('Invalid MakeFunc entity.')
+            return false
+        end
         if devinfo.group.MakeFuncReturn then return ent end
     else
         ent = ents.Create(class)
-        if not ent:IsValid() then return false end
+        if not ent:IsValid() then
+            MsgAll("Invalid ents.Create()'d entity.")
+            return false
+        end
         ent:SetModel(model)
         ent:SetAngles(Ang)
         ent:SetPos(Pos)
