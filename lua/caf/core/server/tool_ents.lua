@@ -56,8 +56,20 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     class = devinfo.class
     model = devinfo.model
 
-    if not util.IsValidModel(model) or not util.IsValidProp(model) then
+    -- This is acting fucked (false positives), so we just check for string.
+    -- DarkRP does the same. - N3X
+    --[[
+    if not util.IsValidModel(model) then
         MsgAll('Invalid model: '..model)
+        return false
+    end
+    ]]--
+    if not isstring(model) then
+        MsgAll('model for '..class..' is not a string')
+        return false
+    end
+    if not util.IsValidProp(model) then
+        MsgAll('Invalid prop: '..model)
         return false
     end
 
