@@ -289,7 +289,7 @@ umsg.Start("RD_Network_Data", ply)
 ]]
 
 local function AddNetworkToCache( nrofbytes )
-    print("RD_Network_Data #", nrofbytes, " bytes received")
+    CAFLog.Debug("RD_Network_Data #"..tostring(nrofbytes).." bytes received")
 	local data = {}
 	
 	data.netid = ReadShort() --network key

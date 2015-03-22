@@ -68,7 +68,7 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
     end
     ]]--
     if not isstring(model) then
-        MsgAll('model for '..class..' is not a string\n')
+        CAFLog.Error('Model for '..class..' is not a string\n')
         return false
     end
 

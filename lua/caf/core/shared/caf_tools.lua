@@ -122,12 +122,22 @@ if ( SERVER ) then
 end	
 
 
+function CAF_CheckModelValidity(model)
+    return util.IsValidModel(model) and util.IsValidProp(model)
+end
+
 --CAF_AddStoolItem('cdsweapons', "Heat Gun", 'models/props_junk/TrafficCone001a.mdl', 'gun_heat')
 function CAF_AddStoolItem( ToolName, EntPrintName, EntModel, EntClass, EntMakeFunct, MakeCAFEntSupFunction )
 	if not (ToolName and EntPrintName and EntModel and EntClass) then 
 		CAFLog.Error('Error when calling CAF_AddStoolItem -- ToolName: -'..tostring(ToolName)..'- EntPrintName: -'..tostring(EntPrintName)..'- Model: -'..tostring(Model)..'- EntClass: -'..tostring(EntClass)..'-\n')
 		return 
-	end
+    end
+
+    -- Check model validity BEFORE adding it to the list.
+    if CAF_CheckModelValidity(EntModel) then
+        CAFLog.Error('Error when adding '..ToolName..' (Model '..EntPrintName..'): '..EntModel..' is an invalid model.')
+        return
+    end
 	
 	list.Set( ToolName.."_Models", EntPrintName, { name = EntPrintName, model = EntModel, type = EntClass } )
 	util.PrecacheModel( EntModel )
