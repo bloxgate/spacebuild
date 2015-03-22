@@ -661,23 +661,25 @@ function RD.Beam_Render( ent )
 			--get beam data
 			local beam, ent = ent:GetNWVector( "Beam" .. tostring(i) ), ent:GetNWEntity( "BeamEnt" .. tostring(i) )
 
-			--if no beam break for statement
-			if not beam or  not ent or not ent:IsValid() then
-				ent:SetNWInt( "Beams", 0 )
-				break
-			end
+            if ent and ent:IsValid() then
+                --if no beam break for statement
+                if not beam or not ent:IsValid() then
+                    ent:SetNWInt( "Beams", 0 )
+                    break
+                end
 
-			--get beam world vector
-			local pos = ent:LocalToWorld(beam)
+                --get beam world vector
+                local pos = ent:LocalToWorld(beam)
 
-			--update scroll
-			scroll = scroll - (pos-start):Length()/10
+                --update scroll
+                scroll = scroll - (pos-start):Length()/10
 
-			-- add point
-			render.AddBeam(pos, beamSize, scroll, color)
+                -- add point
+                render.AddBeam(pos, beamSize, scroll, color)
 
-			--reset start postion
-			start = pos
+                --reset start postion
+                start = pos
+            end
 		end
 
 		--beam done
