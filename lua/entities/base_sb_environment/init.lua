@@ -376,9 +376,9 @@ function ENT:GetEnvironmentID()
 end
 
 function ENT:PrintVars()
-	Msg("Print Environment Data\n")
-	PrintTable(self.sbenvironment)
-	Msg("End Print Environment Data\n")
+	--Msg("Print Environment Data\n")
+	--PrintTable(self.sbenvironment)
+	--Msg("End Print Environment Data\n")
 end
 
 function ENT:GetEnvClass()
