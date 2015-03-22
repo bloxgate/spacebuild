@@ -8,7 +8,7 @@ TOOL.ClassName = "valves"
 TOOL.DevSelect = true
 TOOL.CCVar_type = "rd_ent_valve"
 TOOL.CCVar_sub_type = "normal"
-TOOL.CCVar_model = "models/ResourcePump/resourcepump.mdl"
+TOOL.CCVar_model = "models/resourcepump/resourcepump.mdl"
 
 TOOL.Limited = true
 TOOL.LimitName = "valves"
@@ -52,7 +52,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Default",
-                model = "models/ResourcePump/resourcepump.mdl",
+                model = "models/resourcepump/resourcepump.mdl",
             },
             normal_2 = {
                 Name = "CE Valve",
@@ -68,7 +68,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Default",
-                model = "models/ResourcePump/resourcepump.mdl",
+                model = "models/resourcepump/resourcepump.mdl",
             },
             normal_2 = {
                 Name = "CE Valve",
@@ -84,7 +84,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Default",
-                model = "models/ResourcePump/resourcepump.mdl",
+                model = "models/resourcepump/resourcepump.mdl",
             },
             normal_2 = {
                 Name = "CE Valve",

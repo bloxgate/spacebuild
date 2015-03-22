@@ -8,7 +8,7 @@ TOOL.ClassName			= "resourcenodes"
 TOOL.DevSelect			= true
 TOOL.CCVar_type			= "resource_node"
 TOOL.CCVar_sub_type		= "small_node"
-TOOL.CCVar_model		= "models/SnakeSVx/small_res_node.mdl"
+TOOL.CCVar_model		= "models/snakesvx/small_res_node.mdl"
 
 TOOL.Limited			= true
 TOOL.LimitName			= "resourcenodes"
@@ -95,95 +95,95 @@ TOOL.Devices = {
 		devices = {
 			s_small_node = {
 				Name	= "Tiny node 128",
-				model	= "models/SnakeSVx/s_small_res_node_128.mdl",	
+				model	= "models/snakesvx/s_small_res_node_128.mdl",	
 			},
 			s_small_node2 = {
 				Name	= "Tiny node 256",
-				model	= "models/SnakeSVx/s_small_res_node_256.mdl",	
+				model	= "models/snakesvx/s_small_res_node_256.mdl",	
 			},
 			small_node = {
 				Name	= "Small node 512",
-				model	= "models/SnakeSVx/small_res_node.mdl",
+				model	= "models/snakesvx/small_res_node.mdl",
 			},
 			medium_node = {
 				Name	= "Medium Node 1024",
-				model	= "models/SnakeSVx/medium_res_node.mdl",
+				model	= "models/snakesvx/medium_res_node.mdl",
 			},
 			large_node = {
 				Name	= "Large Node 2048",
-				model	= "models/SnakeSVx/large_res_node.mdl",
+				model	= "models/snakesvx/large_res_node.mdl",
 			},
 			small_pipe_straight_128 = {
 				Name	= "Small Test pipe 128",
-				model	= "models/SnakeSVx/small_res_pipe_straight_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_straight_128.mdl",
 			},
 			small_pipe_straight_256 = {
 				Name	= "Small Test pipe 256",
-				model	= "models/SnakeSVx/small_res_pipe_straight_256.mdl",
+				model	= "models/snakesvx/small_res_pipe_straight_256.mdl",
 			},
 			small_pipe_straight_512 = {
 				Name	= "Small Test pipe 512",
-				model	= "models/SnakeSVx/small_res_pipe_straight_512.mdl",
+				model	= "models/snakesvx/small_res_pipe_straight_512.mdl",
 			},
 			small_pipe_straight_1024 = {
 				Name	= "Small Test pipe 1024",
-				model	= "models/SnakeSVx/small_res_pipe_straight_1024.mdl",
+				model	= "models/snakesvx/small_res_pipe_straight_1024.mdl",
 			},
 			small_pipe_curve1_128 = {
 				Name	= "Small Test pipe curve1 128",
-				model	= "models/SnakeSVx/small_res_pipe_curve1_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_curve1_128.mdl",
 			},
 			small_pipe_curve2_128 = {
 				Name	= "Small Test pipe curve2 128",
-				model	= "models/SnakeSVx/small_res_pipe_curve2_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_curve2_128.mdl",
 			},
 			small_pipe_curve3_128 = {
 				Name	= "Small Test pipe curve3 128",
-				model	= "models/SnakeSVx/small_res_pipe_curve3_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_curve3_128.mdl",
 			},
 			small_pipe_curve4_128 = {
 				Name	= "Small Test pipe curve4 128",
-				model	= "models/SnakeSVx/small_res_pipe_curve4_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_curve4_128.mdl",
 			},
 			small_pipe_T_128 = {
 				Name	= "Small Test pipe T 128",
-				model	= "models/SnakeSVx/small_res_pipe_t_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_t_128.mdl",
 			},
 			small_pipe_T2_128 = {
 				Name	= "Small Test pipe T2 128",
-				model	= "models/SnakeSVx/small_res_pipe_t2_128.mdl",
+				model	= "models/snakesvx/small_res_pipe_t2_128.mdl",
 			},
 			CS_small_pipe_128 = {
 				Name	= "CS Small straight pipe 128",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_straight_128.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_straight_128.mdl",
 			},
 			CS_small_pipe_256 = {
 				Name	= "CS Small straight pipe 256",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_straight_256.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_straight_256.mdl",
 			},
 			CS_small_pipe_512 = {
 				Name	= "CS Small straight pipe 512",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_straight_512.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_straight_512.mdl",
 			},
 			CS_small_pipe_1024 = {
 				Name	= "CS Small straight pipe 1024",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_straight_1024.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_straight_1024.mdl",
 			},
 			CS_small_pipe_curve_1 = {
 				Name	= "CS Small Curve 1 pipe 128",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_curve1_128.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_curve1_128.mdl",
 			},
 			CS_small_pipe_curve_2= {
 				Name	= "CS Small Curve 2 pipe 128",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_curve1_128.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_curve1_128.mdl",
 			},
 			CS_small_pipe_curve_3 = {
 				Name	= "CS Small Curve 3 pipe 128",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_curve3_128.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_curve3_128.mdl",
 			},
 			CS_small_pipe_curve_4= {
 				Name	= "CS Small Curve 4 pipe 128",
-				model	= "models/chipstiks_ls3_models/Pipes/small_res_pipe_curve4_128.mdl",
+				model	= "models/chipstiks_ls3_models/pipes/small_res_pipe_curve4_128.mdl",
 			},
 		},
 	},

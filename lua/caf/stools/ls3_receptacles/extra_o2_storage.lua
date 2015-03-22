@@ -23,15 +23,15 @@ DEVICEGROUP.devices = {
     },
     add_4 = {
         Name = "CS Small Oxygen Storage",
-        model = "models/chipstiks_ls3_models/SmallOxygenTank/smalloxygentank.mdl",
+        model = "models/chipstiks_ls3_models/smalloxygentank/smalloxygentank.mdl",
     },
     add_5 = {
         Name = "CS Medium Oxygen Storage",
-        model = "models/chipstiks_ls3_models/MediumOxygenTank/mediumoxygentank.mdl",
+        model = "models/chipstiks_ls3_models/mediumoxygentank/mediumoxygentank.mdl",
     },
     add_6 = {
         Name = "CS Large Oxygen Storage",
-        model = "models/chipstiks_ls3_models/LargeOxygenTank/largeoxygentank.mdl",
+        model = "models/chipstiks_ls3_models/largeoxygentank/largeoxygentank.mdl",
     },
 }
 

@@ -13,13 +13,13 @@ DEVICEGROUP.devices = {
     },
     add_two = {
         Name = "Levy Huge Fusion Gen",
-        model = "models/LifeSupport/Generators/fusiongen.mdl",
+        model = "models/lifesupport/generators/fusiongen.mdl",
         skin = 0
     },
     -- This one is Purely cosmetic, the texture fades between red and blue on a sine wave, I improved some of the my textures a good bit using proxies. Oh, Also, the selfilium lighting fades as well, on the same curve. :V
     add_again = {
         Name = "Levy Pulsing Fusion Gen",
-        model = "models/LifeSupport/Generators/fusiongen.mdl",
+        model = "models/lifesupport/generators/fusiongen.mdl",
         skin = 1
     },
     add_3 = {

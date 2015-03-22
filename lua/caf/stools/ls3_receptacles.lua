@@ -619,7 +619,7 @@ TOOL.Devices = {
             },
             huge = {
                 Name = "Levy Canister",
-                model = "models/LifeSupport/Storage/cargocanister.mdl",
+                model = "models/lifesupport/storage/cargocanister.mdl",
             },
         },
     },
@@ -679,7 +679,7 @@ TOOL.Devices = {
             },
             huge = {
                 Name = "Levy Canister",
-                model = "models/LifeSupport/Storage/cargocanister.mdl",
+                model = "models/lifesupport/storage/cargocanister.mdl",
             }
         },
     },

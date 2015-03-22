@@ -23,7 +23,7 @@
 	},
 	add_4 = {
 		Name		= "CS Nitrogen Liquifier",
-		model		= "models/chipstiks_ls3_models/NitrogenLiquifier/nitrogenliquifier.mdl",
+		model		= "models/chipstiks_ls3_models/nitrogenliquifier/nitrogenliquifier.mdl",
 		skin 		= 0
 	},
 }]]

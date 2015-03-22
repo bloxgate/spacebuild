@@ -23,15 +23,15 @@ DEVICEGROUP.devices = {
     },
     add_4 = {
         Name = "CS Small Steam Storage",
-        model = "models/chipstiks_ls3_models/SmallSteamTank/smallsteamtank.mdl",
+        model = "models/chipstiks_ls3_models/smallsteamtank/smallsteamtank.mdl",
     },
     add_5 = {
         Name = "CS Medium Steam Storage",
-        model = "models/chipstiks_ls3_models/MediumSteamTank/mediumsteamtank.mdl",
+        model = "models/chipstiks_ls3_models/mediumsteamtank/mediumsteamtank.mdl",
     },
     add_6 = {
         Name = "CS Large Steam Storage",
-        model = "models/chipstiks_ls3_models/LargeSteamTank/largesteamtank.mdl",
+        model = "models/chipstiks_ls3_models/largesteamtank/largesteamtank.mdl",
     },
 }
 

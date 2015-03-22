@@ -23,15 +23,15 @@ DEVICEGROUP.devices = {
     },
     add_4 = {
         Name = "CS Small Nitrogen Storage",
-        model = "models/chipstiks_ls3_models/SmallNitrogenTank/smallnitrogentank.mdl",
+        model = "models/chipstiks_ls3_models/smallnitrogentank/smallnitrogentank.mdl",
     },
     add_5 = {
         Name = "CS Medium Nitrogen Storage",
-        model = "models/chipstiks_ls3_models/MediumNitrogenTank/mediumnitrogentank.mdl",
+        model = "models/chipstiks_ls3_models/mediumnitrogentank/mediumnitrogentank.mdl",
     },
     add_6 = {
         Name = "CS Large Nitrogen Storage",
-        model = "models/chipstiks_ls3_models/LargeNitrogenTank/largenitrogentank.mdl",
+        model = "models/chipstiks_ls3_models/largenitrogentank/largenitrogentank.mdl",
     },
 }
 

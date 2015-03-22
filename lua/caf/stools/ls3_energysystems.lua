@@ -8,7 +8,7 @@ TOOL.ClassName = "ls3_energysystems"
 TOOL.DevSelect = true
 TOOL.CCVar_type = "generator_gas_o2"
 TOOL.CCVar_sub_type = "default_O2"
-TOOL.CCVar_model = "models/chipstiks_ls3_models/OxygenCompressor/oxygencompressor.mdl"
+TOOL.CCVar_model = "models/chipstiks_ls3_models/oxygencompressor/oxygencompressor.mdl"
 
 TOOL.Limited = true
 TOOL.LimitName = "ls3_energysystems"
@@ -234,7 +234,7 @@ TOOL.Devices = {
         devices = {
             default_O2 = {
                 Name = "CS Air Compressor",
-                model = "models/chipstiks_ls3_models/OxygenCompressor/oxygencompressor.mdl",
+                model = "models/chipstiks_ls3_models/oxygencompressor/oxygencompressor.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -248,7 +248,7 @@ TOOL.Devices = {
          devices = {
              default_nitrogen_rec = {
                  Name	= "CS Liquid Nitrogen Generator (Default)",
-                 model	= "models/chipstiks_ls3_models/OxygenCompressor/oxygencompressor.mdl",
+                 model	= "models/chipstiks_ls3_models/oxygencompressor/oxygencompressor.mdl",
                  skin	= 0,
                  legacy	= false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
              },
@@ -262,7 +262,7 @@ TOOL.Devices = {
         devices = {
             default_co2 = {
                 Name = "CS Carbon Dioxide Compressor",
-                model = "models/chipstiks_ls3_models/CO2Comp/co2comp.mdl",
+                model = "models/chipstiks_ls3_models/co2comp/co2comp.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -276,7 +276,7 @@ TOOL.Devices = {
         devices = {
             default_h = {
                 Name = "CS Hydrogen Compressor",
-                model = "models/chipstiks_ls3_models/HydrogenCompressor/hydrogencompressor.mdl",
+                model = "models/chipstiks_ls3_models/hydrogencompressor/hydrogencompressor.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -290,7 +290,7 @@ TOOL.Devices = {
         devices = {
             default_n = {
                 Name = "CS Nitrogen Compressor",
-                model = "models/chipstiks_ls3_models/NitrogenCompressor/nitrogencompressor.mdl",
+                model = "models/chipstiks_ls3_models/nitrogencompressor/nitrogencompressor.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -324,7 +324,7 @@ TOOL.Devices = {
         devices = {
             large_phx = {
                 Name = "Eversmart1",
-                model = "models/LifeSupport/Generators/waterairextractor.mdl",
+                model = "models/lifesupport/generators/waterairextractor.mdl",
                 skin = 0,
                 legacy = false,
             },
@@ -338,7 +338,7 @@ TOOL.Devices = {
         devices = {
             large_phx = {
                 Name = "Eversmart1",
-                model = "models/LifeSupport/Generators/waterairextractor.mdl",
+                model = "models/lifesupport/generators/waterairextractor.mdl",
                 skin = 0,
                 legacy = false,
             },
@@ -387,7 +387,7 @@ TOOL.Devices = {
         devices = {
             small_phx = {
                 Name = "CS Hydro Gen",
-                model = "models/chipstiks_ls3_models/HydroGenerator/hydrogenerator.mdl",
+                model = "models/chipstiks_ls3_models/hydrogenerator/hydrogenerator.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -453,7 +453,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Levy's RamScoop",
-                model = "models/LifeSupport/Generators/ramscoop.mdl",
+                model = "models/lifesupport/generators/ramscoop.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },
@@ -473,7 +473,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Levy's RamScoop",
-                model = "models/LifeSupport/Generators/ramscoop.mdl",
+                model = "models/lifesupport/generators/ramscoop.mdl",
                 skin = 0,
                 legacy = false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
             },

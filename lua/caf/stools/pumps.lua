@@ -52,7 +52,7 @@ TOOL.Devices = {
         devices = {
             normal = {
                 Name = "Default",
-                model = "models/ResourcePump/resourcepump.mdl",
+                model = "models/resourcepump/resourcepump.mdl",
             },
             normal_2 = {
                 Name = "CE Pump",

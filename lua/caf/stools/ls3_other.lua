@@ -8,7 +8,7 @@ TOOL.ClassName = "ls3_other"
 TOOL.DevSelect = true
 TOOL.CCVar_type = "other_screen"
 TOOL.CCVar_sub_type = "Small"
-TOOL.CCVar_model = "models/SnakeSVx/small_screen_ls_1.mdl"
+TOOL.CCVar_model = "models/snakesvx/small_screen_ls_1.mdl"
 
 TOOL.Limited = true
 TOOL.LimitName = "ls3_other"
@@ -67,19 +67,19 @@ TOOL.Devices = {
         devices = {
             s_small = {
                 Name = "Tiny Screen",
-                model = "models/SnakeSVx/s_small_screen_ls_1.mdl",
+                model = "models/snakesvx/s_small_screen_ls_1.mdl",
             },
             small = {
                 Name = "Small Screen",
-                model = "models/SnakeSVx/small_screen_ls_1.mdl",
+                model = "models/snakesvx/small_screen_ls_1.mdl",
             },
             medium = {
                 Name = "Medium Screen",
-                model = "models/SnakeSVx/medium_screen_ls_1.mdl",
+                model = "models/snakesvx/medium_screen_ls_1.mdl",
             },
             large = {
                 Name = "Large Screen",
-                model = "models/SnakeSVx/large_screen_ls_1.mdl",
+                model = "models/snakesvx/large_screen_ls_1.mdl",
             },
         }
     },

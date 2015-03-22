@@ -13,7 +13,7 @@ DEVICEGROUP.devices = {
     },
     add_2 = {
         Name = "CS Large Water Pump",
-        model = "models/chipstiks_ls3_models/LargeH2OPump/largeh2opump.mdl",
+        model = "models/chipstiks_ls3_models/largeh2opump/largeh2opump.mdl",
     },
 }
 

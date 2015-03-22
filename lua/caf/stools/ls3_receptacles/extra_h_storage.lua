@@ -23,15 +23,15 @@ DEVICEGROUP.devices = {
     },
     add_4 = {
         Name = "CS Small Hydrogen Storage",
-        model = "models/chipstiks_ls3_models/SmallHydrogenTank/smallhydrogentank.mdl",
+        model = "models/chipstiks_ls3_models/smallhydrogentank/smallhydrogentank.mdl",
     },
     add_5 = {
         Name = "CS Medium Hydrogen Storage",
-        model = "models/chipstiks_ls3_models/MediumHydrogenTank/mediumhydrogentank.mdl",
+        model = "models/chipstiks_ls3_models/mediumhydrogentank/mediumhydrogentank.mdl",
     },
     add_6 = {
         Name = "CS Large Hydrogen Storage",
-        model = "models/chipstiks_ls3_models/LargeHydrogenTank/largehydrogentank.mdl",
+        model = "models/chipstiks_ls3_models/largehydrogentank/largehydrogentank.mdl",
     },
 }
 

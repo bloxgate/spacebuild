@@ -8,7 +8,7 @@ TOOL.ClassName = "sb_dev_plants"
 TOOL.DevSelect = true
 TOOL.CCVar_type = "nature_dev_tree"
 TOOL.CCVar_sub_type = "default"
-TOOL.CCVar_model = "models/chipstiks_ls3_models/OxygenCompressor/oxygencompressor.mdl"
+TOOL.CCVar_model = "models/chipstiks_ls3_models/oxygencompressor/oxygencompressor.mdl"
 
 TOOL.Limited = true
 TOOL.LimitName = "sb_dev_plants"

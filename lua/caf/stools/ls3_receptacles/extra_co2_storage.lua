@@ -23,15 +23,15 @@ DEVICEGROUP.devices = {
     },
     add_4 = {
         Name = "CS Small Carbon Dioxide Storage",
-        model = "models/chipstiks_ls3_models/SmallCO2Tank/smallco2tank.mdl",
+        model = "models/chipstiks_ls3_models/smallco2tank/smallco2tank.mdl",
     },
     add_5 = {
         Name = "CS Medium Carbon Dioxide Storage",
-        model = "models/chipstiks_ls3_models/MediumCO2Tank/mediumco2tank.mdl",
+        model = "models/chipstiks_ls3_models/mediumco2tank/mediumco2tank.mdl",
     },
     add_6 = {
         Name = "CS Large Carbon Dioxide Storage",
-        model = "models/chipstiks_ls3_models/LargeCO2Tank/largeco2tank.mdl",
+        model = "models/chipstiks_ls3_models/largeco2tank/largeco2tank.mdl",
     },
 }
 
