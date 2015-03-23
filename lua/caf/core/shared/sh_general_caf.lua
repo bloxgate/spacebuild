@@ -267,18 +267,18 @@ function CAF2.GetLangVar(name)
 	return name or "Unknown"
 end
 function CAF.GetOwner(ent)
-    if not IsValid(ent) then
+    if ent == nil then
         return nil
-    end
-    if ent.GetOwner then
-        local ply = ent:GetOwner()
-        if ply and IsValid(ply) then
-            return ply
-        end
     end
     if ent.GetPlayer then
         local ply = ent:GetPlayer()
-        if ply and IsValid(ply) then
+        if IsValid(ply) then
+            return ply
+        end
+    end
+    if ent.GetOwner then
+        local ply = ent:GetOwner()
+        if IsValid(ply) then
             return ply
         end
     end
@@ -287,8 +287,9 @@ end
 
 function CAF.GetOwnerName(ent)
     local ply = CAF.GetOwner(ent)
-    if ply and IsValid(ply) then
+    if IsValid(ply) then
         return ply:GetName()
+    else
+        return "World"
     end
-    return "World"
 end
