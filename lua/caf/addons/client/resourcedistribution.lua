@@ -230,7 +230,7 @@ local function ReadLong()
 end
 
 local function AddEntityToCache( nrofbytes )
-    print("RD_Entity_Data #", nrofbytes, " bytes received")
+    CAFLog.Debug("RD_Entity_Data #"..tostring(nrofbytes).. " bytes received")
 	local data = {}
 
 	data.entid = ReadShort() --Key
