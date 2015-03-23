@@ -47,15 +47,12 @@ function ENT:DoNormalDraw( bDontDrawModel )
 		local nettable = CAF.GetAddon("Resource Distribution").GetNetTable(netid)
 		
 		local range = self:GetNetworkedInt("range")
-		local playername = self:GetPlayerName()
+        local playername = CAF.GetOwnerName(self)
 		local nodename = self:GetNetworkedString("rd_node_name")
-		if playername == "" then
-			playername = "World"
-		end
+
 		-- 0 = no overlay
 		-- 1 = default overlaytext
 		-- 2 = new overlaytext
-
 		if not mode or mode == 1 or string.find(self:GetModel(),"s_small_res") then
 			local OverlayText = ""
 			OverlayText = OverlayText .. "Network " .. netid .."\n"

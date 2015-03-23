@@ -229,14 +229,11 @@ function ENT:DoNormalDraw( bDontDrawModel )
 		local trace = LocalPlayer():GetEyeTrace()
 		if ( !bDontDrawModel ) then self:DrawModel() end
 		local netid = self:GetNetworkedInt("netid")
-		local playername = self:GetPlayerName()
-		if playername == "" then
-			playername = "World"
-		end
+        local playername = CAF.GetOwnerName(self)
+
 		-- 0 = no overlay!
 		-- 1 = default overlaytext
 		-- 2 = new overlaytext
-
 		if not mode or mode ~= 2 then
 			local OverlayText = ""
 				OverlayText = OverlayText ..self:GetNetworkedString("name").." ("..tostring(self:EntIndex())..")\n"

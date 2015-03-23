@@ -31,7 +31,7 @@ TOOL.ClientConVar[ "color_a" ] = "255"
 local function link_in_range(ent, range)
 	for k, v in pairs(ents.FindInSphere( ent:GetPos(), range)) do
 		local enttable = CAF.GetAddon("Resource Distribution").GetEntityTable(v)
-		if table.Count(enttable) > 0 and enttable.network == 0 and ent:GetPlayerName() == v:GetPlayerName() then
+		if table.Count(enttable) > 0 and enttable.network == 0 and CAF.GetOwner(ent) == CAF.GetOwner(v) then
 			CAF.GetAddon("Resource Distribution").Link(v, ent.netid)
 		end
 	end

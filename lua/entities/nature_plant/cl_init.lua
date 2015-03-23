@@ -9,10 +9,7 @@ function ENT:DoNormalDraw(bDontDrawModel)
         if (not bDontDrawModel) then self:DrawModel() end
         local nettable = CAF.GetAddon("Resource Distribution").GetEntityTable(self)
         if table.Count(nettable) <= 0 then return end
-        local playername = self:GetPlayerName()
-        if playername == "" then
-            playername = "World"
-        end
+        local playername = CAF.GetOwnerName(self)
         if not mode or mode ~= 2 then
             local OverlayText = ""
             OverlayText = OverlayText .. self.PrintName .. "\n"
