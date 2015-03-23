@@ -80,7 +80,7 @@ local function OnAddonDestruct(name)
 			if err then
 				AddPopup(CAF.GetLangVar("Addon")..": " .. CAF.GetLangVar(name) .. " "..CAF.GetLangVar("got disabled"),"top", CAF2.colors.green);
 			else
-				AddPopup(CAF.GetLangVar("An error occured when trying to disable Addon")..": " .. CAF.GetLangVar(name),"top", CAF2.colors.red);
+				AddPopup(CAF.GetLangVar("An error occured when trying to disable addon")..": " .. CAF.GetLangVar(name),"top", CAF2.colors.red);
 			end
 		end
 	end
