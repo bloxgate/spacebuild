@@ -39,11 +39,10 @@ en["This addon wasn't on in the first place"] = "This addon wasn't on in the fir
 --CAF Stuff
 en["Error unloading Addon"] = "Error unloading Addon"
 en["Error loading Addon"] = "Error loading Addon"
-en["Addon"] = "Addon"
-en["got disabled"] = "got disabled"
-en["An error occured when trying to disable Addon"] = "An error occured when trying to disable Addon"
-en["got enabled"] = "got enabled"
-en["An error occured when trying to enable Addon"] = "An error occured when trying to enable Addon"
+en["#addon_disable_success"] = "Successfully disabled addon %s." -- Arg 1 = addon name.
+en["#addon_disable_failure"] = "An error occurred when trying to disable addon %s." -- Arg 1 = addon name.
+en["#addon_enable_success"] = "Successfully enabled addon %s." -- Arg 1 = addon name.
+en["#addon_enable_failure"] = "An error occurred when trying to enable addon %s." -- Arg 1 = addon name.
 en["Missing Argument"] = "Missing Argument"
 en["No HookName given"] = "No HookName given"
 en["No function given"] = "No function given"

@@ -78,9 +78,11 @@ local function OnAddonDestruct(name)
 			AddPopup(CAF.GetLangVar("Error unloading Addon")..": " .. CAF.GetLangVar(name), "top", CAF2.colors.red);
 		else
 			if err then
-				AddPopup(CAF.GetLangVar("Addon")..": " .. CAF.GetLangVar(name) .. " "..CAF.GetLangVar("got disabled"),"top", CAF2.colors.green);
-			else
-				AddPopup(CAF.GetLangVar("An error occured when trying to disable addon")..": " .. CAF.GetLangVar(name),"top", CAF2.colors.red);
+                -- Addon %s was successfully disabled.
+				AddPopup(string.format(CAF.GetLangVar("#addon_disable_success"), CAF.GetLangVar(name)),"top", CAF2.colors.green);
+            else
+                -- Could not disable addon %s.
+                AddPopup(string.format(CAF.GetLangVar("#addon_disable_failure"),CAF.GetLangVar(name)),"top", CAF2.colors.red)
 			end
 		end
 	end
@@ -105,9 +107,11 @@ local function OnAddonConstruct(name)
 				AddPopup(CAF.GetLangVar("Error loading Addon")..": " .. CAF.GetLangVar(name), "top", CAF2.colors.red);
 			else
 				if err then
-					AddPopup(CAF.GetLangVar("Addon")..": " .. CAF.GetLangVar(name) .. " "..CAF.GetLangVar("got enabled"),"top", CAF2.colors.green);
+                    -- Addon %s successfully enabled.
+					AddPopup(string.format(CAF.GetLangVar("#addon_enable_success"), CAF.GetLangVar(name)),"top", CAF2.colors.green);
 				else
-					AddPopup(CAF.GetLangVar("An error occured when trying to enable Addon")..": " .. CAF.GetLangVar(name),"top", CAF2.colors.red);
+                    -- Could not disable addon %s.
+                    AddPopup(string.format(CAF.GetLangVar("#addon_enable_failure"), CAF.GetLangVar(name)),"top",CAF2.colors.red);
 				end
 			end
 		end
@@ -138,19 +142,14 @@ end
 function CAF2.WriteToDebugFile(filename, message)
 	if not filename or not message then return nil , CAF.GetLangVar("Missing Argument") end
 	if DEBUG then
-		ErrorNoHalt("Filename: "..tostring(filename)..", Message: "..tostring(message).."\n")
+		CAFLog.Error("Filename: "..tostring(filename)..", Message: "..tostring(message).."\n")
 	end
-	local contents = file.Read("CAF_Debug/client/"..filename..".txt")
-	contents = contents or "" 
-	contents = contents .. message
-	file.Write("CAF_Debug/client/"..filename..".txt", contents)
+	file.Append("CAF_Debug/client/"..filename..".txt", contents)
 end
 
 function CAF2.ClearDebugFile(filename)
 	if not filename then return nil , CAF.GetLangVar("Missing Argument") end
-	local contents = file.Read("CAF_Debug/client/"..filename..".txt")
-	contents = contents or "" 
-	file.Write("CAF_Debug/client/"..filename..".txt", "")
+    file.Write("CAF_Debug/client/"..filename..".txt","")
 	return content
 end
 
