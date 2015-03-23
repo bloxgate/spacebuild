@@ -266,29 +266,51 @@ function CAF2.GetLangVar(name)
 	end
 	return name or "Unknown"
 end
-function CAF.GetOwner(ent)
-    if ent == nil then
+
+-- Borrowed from e2lib
+function CAF2.GetOwner(entity)
+    if not entity then
+        CAFLog.Warn('Someone passed a nil to CAF.GetOwner!')
         return nil
     end
-    if ent.GetPlayer then
-        local ply = ent:GetPlayer()
+    if entity.GetPlayer then
+        local ply = entity:GetPlayer()
         if IsValid(ply) then
             return ply
         end
+        --CAFLog.Warn('CAF.GetOwner(): entity:GetPlayer() returned an invalid player!')
     end
-    if ent.GetOwner then
-        local ply = ent:GetOwner()
+    if entity.GetOwner then
+        local ply = entity:GetOwner()
         if IsValid(ply) then
             return ply
+        end
+        --CAFLog.Warn('CAF.GetOwner(): entity:GetOwner() returned an invalid player!')
+    end
+    if entity.GetCreator then
+        local ply = entity:GetCreator()
+        if IsValid(ply) then
+            return ply
+        end
+        --CAFLog.Warn('CAF.GetOwner(): entity:GetCreator() returned an invalid player!')
+    end
+    if CPPI then
+        local owner, ownerID = entity:CPPIGetOwner()
+
+        --Getting the owner of the prop/entity
+        if owner == CPPI_NOTIMPLEMENTED then
+            --Server doesn't support... :(
+        elseif owner:IsValid() then
+            return owner
         end
     end
     return nil
 end
 
-function CAF.GetOwnerName(ent)
-    local ply = CAF.GetOwner(ent)
+function CAF2.GetOwnerName(entity)
+    local ply = CAF2.GetOwner(entity)
     if IsValid(ply) then
-        return ply:GetName()
+        return ply:Name()
     else
         return "World"
     end
