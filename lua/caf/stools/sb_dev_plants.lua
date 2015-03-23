@@ -39,6 +39,17 @@ function TOOL:GetExtraCCVars()
     return Extra_Data
 end
 
+function TOOL:RightClick( trace )
+    if trace.Entity then
+        if !trace.Entity:IsValid() or trace.Entity:IsPlayer() or trace.HitWorld or trace.Entity:IsNPC() then
+            return false
+        end
+    end
+    if CLIENT then return true end
+    trace.Entity.Remove()
+    return true
+end
+
 local function gas_generator_func(ent, type, sub_type, devinfo, Extra_Data, ent_extras)
     local volume_mul = 1
     local base_volume = 4084

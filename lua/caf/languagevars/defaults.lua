@@ -9,7 +9,7 @@ en["caf_menu_tab_title"] = "Custom Addon Framework"
 --Life Support
 en["sb_dev_plants_title"] = "Spacebuild Dev Plants"
 en["sb_dev_plants_desc"] = "Create Dev Plants attached to any surface."
-en["sb_dev_plants_desc2"] = "Left-Click: Spawn a Dev Plant.(Admin Only)  Reload: Repair Plant."
+en["sb_dev_plants_desc2"] = "(Admin Only) Left-Click: Spawn a Dev Plant. Right-Click to remove. Reload: Repair Plant."
 
 en["O2 Refresh Rate"] = "O2 Refresh Rate"
 en["Dev Plants (Auto O2 Refresher)"] = "Dev Plants (Auto O2 Refresher)"
