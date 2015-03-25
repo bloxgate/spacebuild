@@ -15,5 +15,10 @@ DEVICEGROUP.devices = {
         Name = "CS Large Water Pump",
         model = "models/chipstiks_ls3_models/largeh2opump/largeh2opump.mdl",
     },
+    motor = {
+        Name = "N3X15 - 3-Phase Motor",
+        model = "models/n3x15/motor/electric_motor.mdl",
+        material = "models/n3x15/motor/electric_motor",
+    },
 }
 
