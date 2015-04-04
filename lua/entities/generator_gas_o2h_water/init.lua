@@ -7,6 +7,11 @@ include('shared.lua')
 
 local Energy_Increment = 150
 local Water_Increment = 500
+
+-- Remember, water is H2O.  Two H atoms, one O.
+local O2_RATIO = 0.5 -- One O is produced, which then combines to form O2.
+local H2_RATIO = 1   -- Two H are produced, which combine to form H2.
+
 local Generator_Effect = 1 --Less than one means that this generator "leak" resources
 
 function ENT:Initialize()
@@ -156,6 +161,7 @@ end
 function ENT:Proc_Water()
     local energy = self:GetResourceAmount("energy")
     local water = self:GetResourceAmount("water")
+
     local einc = Energy_Increment + (self.overdrive * Energy_Increment)
     einc = (math.Round(einc * self:GetMultiplier())) * self.Multiplier
     local winc = Water_Increment + (self.overdrive * Water_Increment)
@@ -179,11 +185,11 @@ function ENT:Proc_Water()
 
         winc = math.Round(winc * Generator_Effect)
 
-        local supplyO2 = math.Round(winc / 2)
+        local supplyO2 = math.Round(winc * O2_RATIO)
         local leftO2 = self:SupplyResource("oxygen", supplyO2)
         if not (WireAddon == nil) then Wire_TriggerOutput(self, "OxygenProduction", supplyO2) end
 
-        local supplyH = winc * 2
+        local supplyH = math.Round(winc * H2_RATIO)
         local leftH = self:SupplyResource("hydrogen", supplyH)
         if not (WireAddon == nil) then Wire_TriggerOutput(self, "HydrogenProduction", supplyH) end
 

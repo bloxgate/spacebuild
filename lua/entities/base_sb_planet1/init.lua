@@ -329,6 +329,6 @@ function ENT:ColorEffect(AddColor_r, AddColor_g, AddColor_b, MulColor_r, MulColo
     if Color then
         self.sbenvironment.color.Color = Color
     end
-    Msg("Sending color update\n")
+    --Msg("Sending color update\n")
     SendColor(self)
 end

@@ -41,7 +41,6 @@ end
 
 --[[
 	Will add a new resource to the environment Air Supply, will try to fill up any Vacuum with the new Air if a Start value (either value or percentage)  is set
-
 ]]
 function ENT:AddExtraResource(res, start, ispercentage)
 	if not res then return false end

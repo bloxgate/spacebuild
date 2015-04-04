@@ -18,7 +18,7 @@ DEVICEGROUP.devices = {
     motor = {
         Name = "N3X15 - 3-Phase Motor",
         model = "models/n3x15/motor/electric_motor.mdl",
-        material = "models/n3x15/motor/electric_motor",
+        material = "models/n3x15/motor/electric_motor", -- NO I DON'T KNOW WHY THE MDL DOESN'T SPECIFY THE FUCKING TEXTURE, STOP ASKING
     },
 }
 
