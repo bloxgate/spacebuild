@@ -38,14 +38,14 @@ Probably broken.
 </table>
 
 ## Spacebuild 3 - STABLE(ish)
-SpaceBuild 3 is the current version of SpaceBuild that I know is (somewhat( working on GMod 13.  This is what the master branch uses.
+SpaceBuild 3 is the current version of SpaceBuild that I know is (somewhat) working on GMod 13.
 
 There are still some issues, but it's now playable.  Most of the remaining problems are with some menus.
 
 <table>
 <tr><th>Branch</th><th>Notes</th></tr>
-<tr><th>sb3</th><td>**"Stable"** - Updated less frequently</td></tr>
-<tr><th>sb3-dev</th><td>Development - Less stable, more frequently updated.</td></tr>
+<tr><th>sb3</th><td><b>"Stable"</b> - Updated less frequently</td></tr>
+<tr><th>sb3-dev</th><td><b>Development</b> - Less stable, more frequently updated.</td></tr>
 </table>
 
 ## Spacebuild 4 - WiP
