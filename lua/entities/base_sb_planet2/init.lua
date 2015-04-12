@@ -4,12 +4,15 @@ include('shared.lua')
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-    self:PhysicsInit(SOLID_NONE)
+    self:PhysicsInit(SOLID_NONE) -- TODO: May be the cause of our physics init errors.
     self:SetMoveType(MOVETYPE_NONE)
     self:SetSolid(SOLID_NONE)
+
+    -- TODO: Move this shit to sbenvironment.
     self.sbenvironment.temperature2 = 0
     self.sbenvironment.sunburn = false
     self.sbenvironment.unstable = false
+
     self:SetNotSolid(true)
     self:DrawShadow(false)
     if CAF then

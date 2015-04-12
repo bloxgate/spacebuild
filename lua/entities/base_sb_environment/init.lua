@@ -2,6 +2,7 @@ AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 
+-- TODO: wat
 local SB_AIR_EMPTY = -1
 local SB_AIR_O2 = 0
 local SB_AIR_CO2 = 1
@@ -21,9 +22,11 @@ function ENT:Initialize()
 	self.sbenvironment.air = {}
 	self.sbenvironment.size = 0
 	self.sbenvironment.gravity = 0
-	self.sbenvironment.atmosphere = 0
-	self.sbenvironment.pressure = 0
-	self.sbenvironment.temperature = 0
+	self.sbenvironment.atmosphere = 0 -- TODO: Remove in lieu of just checking for air/atmosphere.
+	self.sbenvironment.pressure = 0   -- TODO: Calculate from air/atmosphere.
+	self.sbenvironment.temperature = 0 -- TODO: Make property of air/atmosphere.
+    -- TODO: Change air to gas/atmosphere, since it's a bit confusing.
+    -- TODO: Seperate out liquids/whatever the fuck *per is. (peroxide...?)
 	self.sbenvironment.air.o2 = 0
 	self.sbenvironment.air.o2per = 0
 	self.sbenvironment.air.co2 = 0
@@ -44,6 +47,7 @@ end
 ]]
 function ENT:AddExtraResource(res, start, ispercentage)
 	if not res then return false end
+	-- See, this is why we can't have nice things.
 	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
 	if table.HasValue(ignore, res) then return false end
 	if not start then start = 0 end
