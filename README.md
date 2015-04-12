@@ -19,7 +19,7 @@ cd wherever/you/installed/garrysmod/garrysmod/addons
 git clone https://github.com/N3X15/spacebuild
 ```
 
-The default branch is `master`, which is currently SpaceBuild 3.  To choose a different version, see the next section.
+The default branch is `sb3-dev`, which is SpaceBuild 3.  To choose a different version, see the next section.
 
 # Available Versions
 
@@ -44,7 +44,7 @@ There are still some issues, but it's now playable.  Most of the remaining probl
 
 <table>
 <tr><th>Branch</th><th>Notes</th></tr>
-<tr><th>sb3</th><td>"Stable" - Updated less frequently</td></tr>
+<tr><th>sb3</th><td>**"Stable"** - Updated less frequently</td></tr>
 <tr><th>sb3-dev</th><td>Development - Less stable, more frequently updated.</td></tr>
 </table>
 
@@ -58,5 +58,5 @@ SpaceBuild 4 is incomplete, from what I have seen.  It is also probably broken d
 </table>
 
 # Contributions
-If you would like to help just drop a pull request in with your changes! 
+If you would like to help, just drop a pull request in with your changes.
 Please try to keep your coding clean!
