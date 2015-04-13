@@ -51,7 +51,7 @@ function CAFLog.Warn(message)
 end
 
 function CAFLog.Error(message)
-    if CAFLog.level <= CAFLOG_INFO then
+    if CAFLog.level <= CAFLOG_ERROR then
         ErrorNoHalt("CAF [  ERROR]: "..message)
     end
 end
