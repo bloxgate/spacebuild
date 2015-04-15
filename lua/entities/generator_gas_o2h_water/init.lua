@@ -9,8 +9,8 @@ local Energy_Increment = 150
 local Water_Increment = 500
 
 -- Remember, water is H2O.  Two H atoms, one O.
-local O2_RATIO = 0.5 -- One O is produced, which then combines to form O2.
-local H2_RATIO = 1   -- Two H are produced, which combine to form H2.
+local O2_RATIO = 0.33 -- One O is produced, which then combines to form O2.
+local H2_RATIO = 0.66 -- Two H are produced, which combine to form H2.
 
 local Generator_Effect = 1 --Less than one means that this generator "leak" resources
 
