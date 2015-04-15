@@ -15,9 +15,9 @@ for _,mat in pairs(tMats) do
 	
 end
 
-/*---------------------------------------------------------
-   Init( data table )
----------------------------------------------------------*/
+-- ---------------------------------------------------------
+-- Init( data table )
+-- ---------------------------------------------------------
 function EFFECT:Init( data )
 
 	self.Position = data:GetOrigin()
@@ -62,7 +62,7 @@ function EFFECT:Init( data )
 			particle:SetRoll( math.Rand( 20, 80 ) )
 			particle:SetRollDelta( math.random( -1, 1 ) )
 			particle:SetColor(20, math.random(20,60), math.random(100,255))
-			particle:VelocityDecay( true )
+			-- Removed Mar 19, 2015 particle:VelocityDecay( true )
 			end
 	
 	end
@@ -83,7 +83,7 @@ function EFFECT:Init( data )
 			particle:SetRoll( math.Rand( 20, 80 ) )
 			particle:SetRollDelta( math.random( -1, 1 ) )
 			particle:SetColor(100, math.random(100,128), math.random(230,255))
-			particle:VelocityDecay( true )
+            -- Removed Mar 19, 2015 particle:VelocityDecay( true )
 			end
 	
 	end
@@ -93,9 +93,9 @@ function EFFECT:Init( data )
 	
 end
 
-/*---------------------------------------------------------
-   THINK
----------------------------------------------------------*/
+-- ---------------------------------------------------------
+--   THINK
+-- ---------------------------------------------------------
 function EFFECT:Think( )
 
 	
@@ -135,7 +135,7 @@ function EFFECT:Think( )
 					particle:SetRoll( math.Rand( 20, 80 ) )
 					particle:SetRollDelta( math.random( -1, 1 ) )
 					particle:SetColor(20, math.random(20,60), math.random(100,255))
-					particle:VelocityDecay( true )
+                    -- Removed Mar 19, 2015 particle:VelocityDecay( true )
 			
 			end
 		end
@@ -149,9 +149,10 @@ function EFFECT:Think( )
 
 end
 
-/*---------------------------------------------------------
-   Draw the effect
----------------------------------------------------------*/
+-- -------------------------------------------------------
+--   Draw the effect
+-- -------------------------------------------------------
+
 function EFFECT:Render( )
 
 local startpos = self.Position
