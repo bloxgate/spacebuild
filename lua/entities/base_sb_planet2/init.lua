@@ -57,6 +57,16 @@ function ENT:SetFlags(flags)
     self.sbenvironment.sunburn = Extract_Bit(2, flags)
 end
 
+-- Simulates greenhouse gasses.
+function ENT:_GreenhousifyTemperature(t)
+    -- Old delta-based temperature:
+    -- T+((T*((C1-C2)/100))/2)
+    --return t + ((t * ((self:GetCO2Percentage() - self.sbenvironment.air.co2per) / 100)) / 2)
+    -- Simplified:
+    -- T+(T*(C/200))
+    return t + (t * (self:GetCO2Percentage() / 200))
+end
+
 function ENT:GetTemperature(ent)
     if not ent then return end
     local entpos = ent:GetPos()
@@ -114,13 +124,15 @@ function ENT:GetTemperature(ent)
     end
     if lit then
         if self.sbenvironment.temperature2 then
-            return self.sbenvironment.temperature2 + ((self.sbenvironment.temperature2 * ((self:GetCO2Percentage() - self.sbenvironment.air.co2per) / 100)) / 2)
+            --return self.sbenvironment.temperature2 + ((self.sbenvironment.temperature2 * ((self:GetCO2Percentage() - self.sbenvironment.air.co2per) / 100)) / 2)
+            return self:_GreenhousifyTemperature(self.sbenvironment.temperature2)
         end
     end
     if not self.sbenvironment.temperature then
         return 0
     end
-    return self.sbenvironment.temperature + ((self.sbenvironment.temperature * ((self:GetCO2Percentage() - self.sbenvironment.air.co2per) / 100)) / 2)
+    --return self.sbenvironment.temperature + ((self.sbenvironment.temperature * ((self:GetCO2Percentage() - self.sbenvironment.air.co2per) / 100)) / 2)
+    return self:_GreenhousifyTemperature(self.sbenvironment.temperature)
 end
 
 function ENT:Unstable()

@@ -8,6 +8,7 @@ local SB_AIR_O2 = 0
 local SB_AIR_CO2 = 1
 local SB_AIR_N = 2
 local SB_AIR_H = 3
+local SB_IGNORE_RES={"o2per", "co2per", "nper", "hper", "emptyper", "max"}
 
 function ENT:Initialize()
 	--self.BaseClass.Initialize(self) --use this in all ents
@@ -26,20 +27,31 @@ function ENT:Initialize()
 	self.sbenvironment.pressure = 0   -- TODO: Calculate from air/atmosphere.
 	self.sbenvironment.temperature = 0 -- TODO: Make property of air/atmosphere.
     -- TODO: Change air to gas/atmosphere, since it's a bit confusing.
-    -- TODO: Seperate out liquids/whatever the fuck *per is. (peroxide...?)
+    -- TODO: Remove *per (percentage), make a method that can calculate gas levels instead.
 	self.sbenvironment.air.o2 = 0
-	self.sbenvironment.air.o2per = 0
+	--self.sbenvironment.air.o2per = 0
 	self.sbenvironment.air.co2 = 0
-	self.sbenvironment.air.co2per = 0
+	--self.sbenvironment.air.co2per = 0
 	self.sbenvironment.air.n = 0
-	self.sbenvironment.air.nper = 0
+	--self.sbenvironment.air.nper = 0
 	self.sbenvironment.air.h = 0
-	self.sbenvironment.air.hper = 0
-	self.sbenvironment.air.empty = 0
-	self.sbenvironment.air.emptyper = 0
-	self.sbenvironment.air.max = 0
+	--self.sbenvironment.air.hper = 0
+	self.sbenvironment.air.empty = 0    -- TODO: Remove.
+	--self.sbenvironment.air.emptyper = 0
+	self.sbenvironment.air.max = 0      -- TODO: Rename to sbenv.volume.
 	self.sbenvironment.name = "No Name"
 	CAF.GetAddon("Spacebuild").AddEnvironment(self)
+end
+
+-- Total amount of gasses present.
+function ENT:GetTotalGasVolume()
+    local volume = 0
+    for k, v in pairs(self.sbenvironment.air) do
+        if not table.HasValue(SB_IGNORE_RES, k) then
+            volume = volume + v
+        end
+    end
+    return volume
 end
 
 --[[
@@ -47,9 +59,7 @@ end
 ]]
 function ENT:AddExtraResource(res, start, ispercentage)
 	if not res then return false end
-	-- See, this is why we can't have nice things.
-	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
-	if table.HasValue(ignore, res) then return false end
+	if table.HasValue(SB_IGNORE_RES, res) then return false end
 	if not start then start = 0 end
 	if not self.sbenvironment.air[res] then
 		self.sbenvironment.air[res] = 0
@@ -68,9 +78,8 @@ end
 
 function ENT:CheckAirValues()
 	local percentage = 0
-	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
 	for k, v in pairs(self.sbenvironment.air) do
-		if not table.HasValue(ignore, k) then
+		if not table.HasValue(SB_IGNORE_RES, k) then
 			if v and v < 0 then
 				v = 0
 			elseif v and v > 0 then
@@ -93,12 +102,11 @@ end
 	Will try to convert resource 1 to resource 2 for a certain amount
 ]]
 function ENT:ConvertResource(res1, res2, amount)
-	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
 	if not res1 or not res2 or not amount or not type(amount) == "number" then return 0 end
 	if type(res1) == "number" and type(res2) == "number" then
 		return self:Convert(res1, res2, amount)
 	elseif type(res1) == "number" then
-		if table.HasValue(ignore, res2) then return 0 end
+        if table.HasValue(SB_IGNORE_RES, res2) then return 0 end
 		if not self.sbenvironment.air[res2] then
 			self:AddExtraResource(res2)
 		end
@@ -113,7 +121,7 @@ function ENT:ConvertResource(res1, res2, amount)
 		end
 		self.sbenvironment.air[res2] = self.sbenvironment.air[res2] + amount
 	elseif type(res2) == "number" then
-		if table.HasValue(ignore, res1) then return 0 end
+        if table.HasValue(SB_IGNORE_RES, res1) then return 0 end
 		if not self.sbenvironment.air[res1] then
 			self:AddExtraResource(res1)
 		end
@@ -133,7 +141,7 @@ function ENT:ConvertResource(res1, res2, amount)
 		end
 		return amount
 	else
-		if table.HasValue(ignore, res2) or table.HasValue(ignore, res1) then return 0 end
+		if table.HasValue(SB_IGNORE_RES, res2) or table.HasValue(SB_IGNORE_RES, res1) then return 0 end
 		if not self.sbenvironment.air[res1] then
 			self:AddExtraResource(res1)
 		end
@@ -152,8 +160,7 @@ end
 
 function ENT:GetResourceAmount(res)
 	if not res or type(res) == "number" then return 0 end
-	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
-	if table.HasValue(ignore, res) then return 0 end
+    if table.HasValue(SB_IGNORE_RES, res) then return 0 end
 	return self.sbenvironment.air[res] or 0
 end
 
@@ -162,9 +169,9 @@ function ENT:GetResourcePercentage(res)
 	if self.sbenvironment.air.max == 0 then
 		return 0
 	end
-	local ignore = {"o2per", "co2per", "nper", "hper", "emptyper", "max"}
-	if table.HasValue(ignore, res) then return 0 end
-	return ((self:GetResourceAmount(res)  / self.sbenvironment.air.max) * 100)
+	if table.HasValue(SB_IGNORE_RES, res) then return 0 end
+    if not self.sbenvironment.air[res] then return 0 end
+    return (self.sbenvironment.air[res] / self:GetTotalGasVolume())*100
 end
 -- RD stuff begin
 
@@ -399,36 +406,37 @@ end
 function ENT:GetO2Percentage()
 	if self.sbenvironment.air.max == 0 then
 		return 0
-	end
-	return ((self.sbenvironment.air.o2  / self.sbenvironment.air.max) * 100)
+    end
+    return self:GetResourcePercentage("o2")
 end
 
+-- TODO: Eliminate
 function ENT:GetEmptyAirPercentage()
 	if self.sbenvironment.air.max == 0 then
 		return 0
 	end
-	return ((self.sbenvironment.air.empty  / self.sbenvironment.air.max) * 100)
+    return self:GetResourcePercentage("empty")
 end
 
 function ENT:GetCO2Percentage()
 	if self.sbenvironment.air.max == 0 then
 		return 0
 	end
-	return ((self.sbenvironment.air.co2  / self.sbenvironment.air.max) * 100)
+    return self:GetResourcePercentage("co2")
 end
 
 function ENT:GetNPercentage()
 	if self.sbenvironment.air.max == 0 then
 		return 0
 	end
-	return ((self.sbenvironment.air.n  / self.sbenvironment.air.max) * 100)
+    return self:GetResourcePercentage("n")
 end
 
 function ENT:GetHPercentage()
 	if self.sbenvironment.air.max == 0 then
 		return 0
 	end
-	return ((self.sbenvironment.air.h / self.sbenvironment.air.max) * 100)
+    return self:GetResourcePercentage("h")
 end
 
 function ENT:SetSize(size)
@@ -459,11 +467,11 @@ function ENT:ChangeAtmosphere(newatmosphere)
 		self.sbenvironment.air.empty = tmp
 		self.sbenvironment.air.emptyper = self:GetEmptyAirPercentage()
 	else
-		self.sbenvironment.air.o2 = math.Round(GetO2Percentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
-		self.sbenvironment.air.co2 = math.Round(GetCO2Percentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
-		self.sbenvironment.air.n = math.Round(GetNPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
-		self.sbenvironment.air.h = math.Round(GetHPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
-		self.sbenvironment.air.empty = math.Round(GetEmptyAirPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
+		self.sbenvironment.air.o2 = math.Round(self:GetO2Percentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
+		self.sbenvironment.air.co2 = math.Round(self:GetCO2Percentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
+		self.sbenvironment.air.n = math.Round(self:GetNPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
+		self.sbenvironment.air.h = math.Round(self:GetHPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
+		self.sbenvironment.air.empty = math.Round(self:GetEmptyAirPercentage() * 5 * (self:GetVolume()/1000) * newatmosphere)
 		self.sbenvironment.air.max = math.Round(100 * 5 * (self:GetVolume()/1000) * newatmosphere)
 	end
 	self.sbenvironment.atmosphere = newatmosphere
@@ -696,33 +704,33 @@ function ENT:CreateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 	if o2 and type(o2) == "number" and o2 > 0 then
 		if o2 < 0 then o2 = 0 end
 		if o2 > 100 then o2 = 100 end
-		self.sbenvironment.air.o2per = o2
+		--self.sbenvironment.air.o2per = o2
 		self.sbenvironment.air.o2 = math.Round(o2 * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
 	else 
 		o2 = 0
-		self.sbenvironment.air.o2per = 0
+		--self.sbenvironment.air.o2per = 0
 		self.sbenvironment.air.o2 = 0
 	end
 	--set co2 if given
 	if co2 and type(co2) == "number" and co2 > 0 then
 		if co2 < 0 then co2 = 0 end
 		if (100 - o2) < co2 then co2 = 100-o2 end
-		self.sbenvironment.air.co2per = co2
+		--self.sbenvironment.air.co2per = co2
 		self.sbenvironment.air.co2 = math.Round(co2 * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
 	else 
 		co2 = 0
-		self.sbenvironment.air.co2per = 0
+		--self.sbenvironment.air.co2per = 0
 		self.sbenvironment.air.co2 = 0
 	end
 	--set n if given
 	if n and type(n) == "number" and n > 0 then
 		if n < 0 then n = 0 end
 		if ((100 - o2)-co2) < n then n = (100-o2)-co2 end
-		self.sbenvironment.air.nper = n
+		--self.sbenvironment.air.nper = n
 		self.sbenvironment.air.n = math.Round(n * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
 	else 
 		n = 0
-		self.sbenvironment.air.n = 0
+		--self.sbenvironment.air.nper = 0
 		self.sbenvironment.air.n = 0
 	end
 	--set h if given
@@ -744,16 +752,16 @@ function ENT:CreateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 		local tmp = (o2 + co2 + n + h) - 100
 		if co2 > tmp then
 			self.sbenvironment.air.co2 = math.Round((co2 - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.co2per = co2 + tmp
+			--self.sbenvironment.air.co2per = co2 + tmp
 		elseif n > tmp then
 			self.sbenvironment.air.n = math.Round((n - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.nper = n + tmp
+			--self.sbenvironment.air.nper = n + tmp
 		elseif h > tmp then
 			self.sbenvironment.air.h = math.Round((h - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.hper = h + tmp
+			--self.sbenvironment.air.hper = h + tmp
 		elseif o2 > tmp then
 			self.sbenvironment.air.o2 = math.Round((o2 - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.o2per = o2 - tmp
+			--self.sbenvironment.air.o2per = o2 - tmp
 		end
 	end
 	if name then
@@ -768,7 +776,7 @@ function ENT:UpdateSize(oldsize, newsize)
 	if oldsize and newsize and type(oldsize) == "number" and type(newsize) == "number" and oldsize >= 0 and newsize >= 0 then
 		if oldsize == 0 then
 			self.sbenvironment.size = newsize
-			self:UpdateEnvironment(nil, nil, nil, nil, self.sbenvironment.air.o2per, self.sbenvironment.air.co2per, self.sbenvironment.air.nper) 
+			self:UpdateEnvironment(nil, nil, nil, nil, self:GetResourcePercentage("o2"), self:GetResourcePercentage("co2"), self:GetResourcePercentage("n"), self:GetResourcePercentage("h"))
 		elseif newsize == 0 then
 			local tomuch = self.sbenvironment.air.o2
 			if self.environment then
@@ -854,7 +862,7 @@ function ENT:UpdateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 		if o2 < 0 then o2 = 0 end
 		if o2 > 100 then o2 = 100 end
 		self.sbenvironment.air.o2 = math.Round(o2 * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-		self.sbenvironment.air.o2per = o2
+		--self.sbenvironment.air.o2per = o2
 	else 
 		o2 = self:GetO2Percentage()
 	end
@@ -863,7 +871,7 @@ function ENT:UpdateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 		if co2 < 0 then co2 = 0 end
 		if (100 - o2) < co2 then co2 = 100-o2 end
 		self.sbenvironment.air.co2 = math.Round(co2 * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-		self.sbenvironment.air.co2per = co2
+		--self.sbenvironment.air.co2per = co2
 	else 
 		co2 = self:GetCO2Percentage()
 	end
@@ -872,7 +880,7 @@ function ENT:UpdateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 		if n < 0 then n = 0 end
 		if ((100 - o2)-co2) < n then n = (100-o2)-co2 end
 		self.sbenvironment.air.n = math.Round(n * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-		self.sbenvironment.air.nper = n
+		--self.sbenvironment.air.nper = n
 	else 
 		n = self:GetNPercentage()
 	end
@@ -880,28 +888,28 @@ function ENT:UpdateEnvironment(gravity, atmosphere, pressure, temperature, o2, c
 		if h < 0 then h = 0 end
 		if (((100 - o2)-co2)-n) < h then h = (((100-o2)-co2)-n) end
 		self.sbenvironment.air.h = math.Round(h * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-		self.sbenvironment.air.hper = h
+		--self.sbenvironment.air.hper = h
 	else 
 		h = self:GetHPercentage()
 	end
 	if o2 + co2 + n + h < 100 then
 		local tmp = 100 - (o2 + co2 + n + h)
 		self.sbenvironment.air.empty = math.Round(tmp * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-		self.sbenvironment.air.emptyper = tmp
+		--self.sbenvironment.air.emptyper = tmp
 	elseif o2 + co2 + n + h > 100 then
 		local tmp = (o2 + co2 + n + h) - 100
 		if co2 >= tmp then
 			self.sbenvironment.air.co2 = math.Round((co2 - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.co2per = co2 + tmp
+			--self.sbenvironment.air.co2per = co2 + tmp
 		elseif n >= tmp then
 			self.sbenvironment.air.n = math.Round((n - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.nper = n + tmp
+			--self.sbenvironment.air.nper = n + tmp
 		elseif h >= tmp then
 			self.sbenvironment.air.h = math.Round((h - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.hper = h + tmp
+			--self.sbenvironment.air.hper = h + tmp
 		elseif o2 >= tmp then
 			self.sbenvironment.air.o2 = math.Round((o2 - tmp) * 5 * (self:GetVolume()/1000) * self.sbenvironment.atmosphere)
-			self.sbenvironment.air.o2per = o2 - tmp
+			--self.sbenvironment.air.o2per = o2 - tmp
 		end
 	end
 	self:PrintVars()
