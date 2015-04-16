@@ -16,7 +16,8 @@ function ENT:Initialize()
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	self:SetNetworkedInt( "overlaymode", 1 )
-	self:SetNetworkedInt( "OOO", 0 )
+    self:SetNetworkedInt( "OOO", 0 )
+    self:SetNetworkedEntity( "RD3Owner", nil )
 	self.Active = 0
 	self.Active = 0
 	self.sbenvironment = {}
@@ -189,7 +190,11 @@ function ENT:SetActive( value, caller )
 end
 
 function ENT:SetOOO(value)
-	self:SetNetworkedInt( "OOO", value )
+    self:SetNetworkedInt( "OOO", value )
+end
+
+function ENT:SetRD3Owner(ent)
+    self:SetNetworkedEntity("RD3Owner", ent)
 end
 
 AccessorFunc( ENT, "LSMULTIPLIER", "Multiplier", FORCE_NUMBER )

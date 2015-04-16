@@ -270,7 +270,7 @@ end
 -- Borrowed from e2lib
 function CAF2.GetOwner(entity)
     if not entity then
-        CAFLog.Warn('Someone passed a nil to CAF.GetOwner!')
+        CAFLog.Warn('Someone passed a nil to CAF:GetOwner!')
         return nil
     end
     if entity.GetPlayer then
@@ -278,21 +278,33 @@ function CAF2.GetOwner(entity)
         if IsValid(ply) then
             return ply
         end
-        --CAFLog.Warn('CAF.GetOwner(): entity:GetPlayer() returned an invalid player!')
+        --if ply ~= nil then
+        --    CAFLog.Warn('CAF:GetOwner(): entity:GetPlayer() returned an invalid entity: '..tostring(ply))
+        --end
     end
     if entity.GetOwner then
         local ply = entity:GetOwner()
         if IsValid(ply) then
             return ply
         end
-        --CAFLog.Warn('CAF.GetOwner(): entity:GetOwner() returned an invalid player!')
+        --if ply ~= nil then
+        --    CAFLog.Warn('CAF.GetOwner(): entity:GetOwner() returned an invalid entity: '..tostring(ply))
+        --end
     end
     if entity.GetCreator then
         local ply = entity:GetCreator()
         if IsValid(ply) then
             return ply
         end
-        --CAFLog.Warn('CAF.GetOwner(): entity:GetCreator() returned an invalid player!')
+        --if ply ~= nil then
+        --    CAFLog.Warn('CAF.GetOwner(): entity:GetCreator() returned an invalid entity: '..tostring(ply))
+        --end
+    end
+    if entity.GetRD3Owner then
+        local ply = entity:GetRD3Owner()
+        if IsValid(ply) then
+            return ply
+        end
     end
     if CPPI then
         local owner, ownerID = entity:CPPIGetOwner()
@@ -312,6 +324,6 @@ function CAF2.GetOwnerName(entity)
     if IsValid(ply) then
         return ply:Name()
     else
-        return "World"
+        return "[BUG] nil"
     end
 end

@@ -45,7 +45,7 @@ function EFFECT:Init( data )
 	
 	self.smokeparticles = {}
 	self.Emitter = ParticleEmitter( Pos )
-    
+
     self.vecang = VectorRand() -- Moved here to avoid race condition.
 
 	--moving fire plumes

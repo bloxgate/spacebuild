@@ -13,11 +13,20 @@ function ENT:Initialize()
 	self:SetNetworkedInt( "netid", self.netid )
 	self:SetNetworkedInt( "overlaymode", 2 )
 	self.range = self.range or 512
-	self:SetNetworkedInt( "range", self.range )
+    self:SetNetworkedInt( "range", self.range )
+    --self:SetRD3Owner(nil)
 	-- Will add the ability to the node to store 1000 units of energy
 	--CAF.GetAddon("Resource Distribution").AddNetResource(self.netid, "energy", 1000)
 	-- Will Add the ability to the node to store 1000 units of water, with the startup amount at 500 units
 	--CAF.GetAddon("Resource Distribution").AddNetResource(self.netid, "water", 1000, 500)
+end
+
+function ENT:SetRD3Owner(ent)
+    self:SetNetworkedEntity("RD3Owner",ent)
+end
+
+function ENT:GetRD3Owner()
+    return self:GetNetworkedEntity("RD3Owner") or nil
 end
 
 function ENT:SetCustomNodeName(name)

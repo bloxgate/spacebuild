@@ -67,6 +67,10 @@ en["Client Settings"] = "Client Settings"
 en["About"] = "About"
 en["Unknown"] = "Unknown"
 en["Loading"] = "Loading"
+en["Network"] = "Network"
+en["Mode"] = "Mode"
+en["#NoNetwork"] = "Not connected to a network"
+en["#NetworkName"] = "Network Name"
 
 --New CAF Stuff
 en["This Addon is up to date"] = "This Addon is up to date";

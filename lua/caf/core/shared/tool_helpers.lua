@@ -425,6 +425,11 @@ function CAFTool.LeftClick( self, trace )
 	Msg("Ply= "..tostring(ply).."\n")
 	ent:SetPlayer(ply)]]
 	--CAF.OnEntitySpawn(ent , "SENT" , ply) --Calls the CAF SentSpawn Hook
+    ent:SetPlayer(ply)
+    if ent.SetRD3Owner then
+        CAFLog.Info('Setting RD3Owner to '..tostring(ply))
+        ent:SetRD3Owner(ply)
+    end
 
 	local const
 	if not DontWeld and ( trace.Entity:IsValid() or AllowWorldWeld ) then

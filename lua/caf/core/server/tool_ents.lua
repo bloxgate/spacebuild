@@ -119,6 +119,10 @@ function CAFEnts.MakeEnt(tool, ply, Ang, Pos, class, type, sub_type, model, froz
         ent:SetAngles(Ang)
         ent:SetPos(Pos)
         ent:SetPlayer(ply)
+        if ent.SetRD3Owner then
+            CAFLog.Info('Setting RD3Owner to '..tostring(ply))
+            ent:SetRD3Owner(ply)
+        end
         ent:Spawn() --run ENT:Initialize()
         ent:Activate()
 

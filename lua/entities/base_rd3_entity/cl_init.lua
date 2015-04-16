@@ -30,6 +30,10 @@ function ENT:GetOOO()
     return self:GetNetworkedInt("OOO") or 0
 end
 
+function ENT:GetRD3Owner()
+    return self:GetNetworkedEntity("RD3Owner") or nil
+end
+
 function ENT:DoNormalDraw(bDontDrawModel)
     local mode = self:GetNetworkedInt("overlaymode")
     if RD_OverLay_Mode and mode ~= 0 then -- Don't enable it if disabled by default!
@@ -71,17 +75,19 @@ function ENT:DoNormalDraw(bDontDrawModel)
             local OverlayText = ""
             OverlayText = OverlayText .. self.PrintName .. "\n"
             if nettable.network == 0 then
-                OverlayText = OverlayText .. "Not connected to a network\n"
+                -- #NoNetwork = "Not connected to a network"
+                OverlayText = OverlayText .. CAF.GetLangVar("#NoNetwork").."\n"
             else
-                OverlayText = OverlayText .. "Network " .. nettable.network .. "\n"
+                -- Network = "Network"
+                OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("Network"), nettable.network)
             end
-            OverlayText = OverlayText .. "Owner: " .. playername .. "\n"
+            OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("Owner"), playername)
             if HasOOO then
-                local runmode = "UnKnown"
+                local runmode = "Unknown"
                 if self:GetOOO() >= 0 and self:GetOOO() <= 2 then
                     runmode = OOO[self:GetOOO()]
                 end
-                OverlayText = OverlayText .. "Mode: " .. runmode .. "\n"
+                OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("Mode"), runmode)
             end
             OverlayText = OverlayText .. "\n"
             local resources = nettable.resources

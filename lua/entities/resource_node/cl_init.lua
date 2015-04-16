@@ -21,6 +21,10 @@ function ENT:DrawTranslucent( bDontDrawModel )
 	self:Draw()
 end
 
+function ENT:GetRD3Owner()
+    return self:GetNetworkedEntity("RD3Owner") or nil
+end
+
 function ENT:DoNormalDraw( bDontDrawModel )
 	local mode = self:GetNetworkedInt("overlaymode")
 	if RD_OverLay_Mode and mode ~= 0 then -- Don't enable it if disabled by default!
@@ -55,11 +59,11 @@ function ENT:DoNormalDraw( bDontDrawModel )
 		-- 2 = new overlaytext
 		if not mode or mode == 1 or string.find(self:GetModel(),"s_small_res") then
 			local OverlayText = ""
-			OverlayText = OverlayText .. "Network " .. netid .."\n"
+			OverlayText = OverlayText .. string.format("%s: %d\n",CAF.GetLangVar("Network"),netid)
 			if nodename ~= "" then
-				OverlayText = OverlayText .. "Networkname " .. nodename .."\n"
+                OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("#NetworkName"),nodename)
 			end
-			OverlayText = OverlayText .. "Owner: " .. playername .."\n"
+            OverlayText = OverlayText .. string.format("%s: %d\n",CAF.GetLangVar("Owner"),playername)
 			OverlayText = OverlayText .. "Range: " .. range .."\n"
 			if table.Count(nettable) <= 0 then 
 				OverlayText = OverlayText .. "Loading network data...\n"
@@ -137,7 +141,7 @@ function ENT:DoNormalDraw( bDontDrawModel )
 						surface.SetFont("Flavour")
 						surface.SetTextColor(200,200,255,255)
 						surface.SetTextPos(textStartPos+15,TempY)
-						surface.DrawText("Nodename: "..nodename)
+                        surface.DrawText(string.format("%s: %s",CAF.GetLangVar("#NetworkName"),nodename))
 						TempY = TempY + extra
 					end
 					surface.SetFont("Flavour")

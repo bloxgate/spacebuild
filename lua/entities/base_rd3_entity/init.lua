@@ -10,9 +10,18 @@ function ENT:Initialize()
     self:SetSolid(SOLID_VPHYSICS)
     self:SetNetworkedInt("overlaymode", 1)
     self:SetNetworkedInt("OOO", 0)
+    self:SetNetworkedEntity("RD3Owner",nil)
     self.Active = 0
     self.caf = self.caf or {}
     self.caf.custom = self.caf.custom or {}
+end
+
+function ENT:SetRD3Owner(ent)
+    self:SetNetworkedEntity("RD3Owner",ent)
+end
+
+function ENT:GetRD3Owner()
+    return self:GetNetworkedEntity("RD3Owner") or nil
 end
 
 --use this to set self.active

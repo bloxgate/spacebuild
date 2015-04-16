@@ -20,6 +20,10 @@ if ( SERVER ) then
 		ent:SetAngles(Ang)
 		ent:SetPos(Pos)
 		ent:SetPlayer(ply)
+        if ent.SetRD3Owner then
+            CAFLog.Info('Setting RD3Owner to '..tostring(ply))
+            ent:SetRD3Owner(ply)
+        end
 		ent:Spawn() --run ENT:Initialize()
 		
 		local rtable, maxhealth, mass = {}, 0, 0
@@ -234,11 +238,11 @@ if ( SERVER ) then
 		local Pos = trace.HitPos
 		local Ang = trace.HitNormal:Angle()
 		Ang.pitch = Ang.pitch + 90
-		local type			= tool:GetClientInfo('type')
-		local model			= tool:GetClientInfo('model')
-		local AllowWorldWeld		= tool:GetClientNumber('AllowWorldWeld') == 1
-		local DontWeld			= tool:GetClientNumber('DontWeld') == 1
-		local Frozen			= (tool:GetClientNumber('Frozen') == 1) or (AllowWorldWeld and not trace.Entity:IsValid())
+		local type           = tool:GetClientInfo('type')
+		local model          = tool:GetClientInfo('model')
+		local AllowWorldWeld = tool:GetClientNumber('AllowWorldWeld') == 1
+		local DontWeld       = tool:GetClientNumber('DontWeld') == 1
+		local Frozen         = (tool:GetClientNumber('Frozen') == 1) or (AllowWorldWeld and not trace.Entity:IsValid())
 		if (not type or type == '') then
 			CAF.WriteToDebugFile("caf_tool_error", "CAF: GetClientInfo('type') is nil!\n")
 			return false
@@ -248,9 +252,14 @@ if ( SERVER ) then
 		local ent = func( ply, Ang, Pos, type, model, Frozen)
 		if (not ent) then return false end
 		ent:SetPos( trace.HitPos - trace.HitNormal * ent:OBBMins().z)
+        ent:SetPlayer(ply)
+        if ent.SetRD3Owner then
+            CAFLog.Info('Setting RD3Owner to '..tostring(ply))
+            ent:SetRD3Owner(ply)
+        end
 		--CAF.OnEntitySpawn(ent , "SENT" , ply) --Calls the CAF SentSpawn Hook
 		local const
-		if (!DontWeld) and ( trace.Entity:IsValid() or AllowWorldWeld ) then
+		if (not DontWeld) and ( trace.Entity:IsValid() or AllowWorldWeld ) then
 			const = constraint.Weld(ent, trace.Entity,0, trace.PhysicsBone, 0, true ) --add true to turn DOR on
 		end
 		
