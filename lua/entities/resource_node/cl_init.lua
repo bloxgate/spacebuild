@@ -63,7 +63,7 @@ function ENT:DoNormalDraw( bDontDrawModel )
 			if nodename ~= "" then
                 OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("#NetworkName"),nodename)
 			end
-            OverlayText = OverlayText .. string.format("%s: %d\n",CAF.GetLangVar("Owner"),playername)
+            OverlayText = OverlayText .. string.format("%s: %s\n",CAF.GetLangVar("Owner"),playername)
 			OverlayText = OverlayText .. "Range: " .. range .."\n"
 			if table.Count(nettable) <= 0 then 
 				OverlayText = OverlayText .. "Loading network data...\n"

@@ -18,7 +18,7 @@ local function OpenMenu(um)
     MainFrames[ent:EntIndex()] = MainFrame
     MainFrame:SetDeleteOnClose()
     MainFrame:SetDraggable(false)
-    MainFrame:SetTitle("Terraformer " .. tostring(ent:EntIndex()) .. "'s Control Panel")
+    MainFrame:SetTitle(string.format("Terraformer %d's Control Panel",ent:EntIndex()))
     MainFrame:SetSize(600, 350)
     MainFrame:Center()
 
