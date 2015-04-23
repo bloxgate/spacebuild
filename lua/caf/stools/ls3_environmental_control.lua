@@ -175,6 +175,12 @@ TOOL.Devices = {
                 skin = 0,
                 legacy = false,
             },
+			small = {
+				Name = "Small Climate Regulator",
+				model = "models/smallbridge/life support/sbclimatereg.mdl",
+				skin = 0,
+				legacy = false;
+			},
         },
     },
     other_probe = {
