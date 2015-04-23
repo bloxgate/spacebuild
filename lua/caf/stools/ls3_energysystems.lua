@@ -240,7 +240,7 @@ TOOL.Devices = {
             },
         },
     },
-    --[[generator_liquid_nitrogen = {
+    generator_liquid_nitrogen = {
          Name	= "Liquid Nitrogen Generator",
          type	= "generator_liquid_nitrogen",
          class	= "generator_liquid_nitrogen",
@@ -248,12 +248,12 @@ TOOL.Devices = {
          devices = {
              default_nitrogen_rec = {
                  Name	= "CS Liquid Nitrogen Generator (Default)",
-                 model	= "models/chipstiks_ls3_models/oxygencompressor/oxygencompressor.mdl",
+                 model	= "models/chipstiks_ls3_models/nitrogenliquifier/nitrogenliquifier.mdl",
                  skin	= 0,
                  legacy	= false, --these two vars must be defined per ent as the old tanks (defined in external file) require different values
              },
          },
-     },]]
+     },
     generator_gas_co2 = {
         Name = "Carbon Dioxide Compressor",
         type = "generator_gas_co2",
