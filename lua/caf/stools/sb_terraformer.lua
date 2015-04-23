@@ -63,7 +63,7 @@ TOOL.Devices = {
         devices = {
             default = {
                 Name = "Basic Terraformer",
-                model = "models/ce_ls3additional/plants/plantfull.mdl",
+                model = "models/chipstiks_ls3_models/terraformer/terraformer.mdl",
             },
         },
     },
