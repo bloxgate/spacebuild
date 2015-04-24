@@ -8,6 +8,7 @@ ENT.GetEnvClass	= "SB ENVIRONMENT"
 
 SB_Environments_Brush_List = SB_Environments_Brush_List or {}
 local Init_Debugging_Override = true
+local SB = CAF.GetAddon("Spacebuild")
 
 function ENT:Initialize()
 	if not self.Initialized then
@@ -21,12 +22,15 @@ function ENT:Initialize()
 		for i = 1, 9001 do -- For good measure. Hell, if it does happen then they deserve it!
 			Error("You're not running spacebuild. :(\n")
 		end
+	else
+		Error("AddEnvironment function does not exist :(")
 	end
 
 	self.SpacedVector = Vector(self.sbenvironment.DecompressionSettings.X or 0, 
 							   self.sbenvironment.DecompressionSettings.Y or 0, 
 							   self.sbenvironment.DecompressionSettings.Z or 0)
 
+	/*This is broke
 	if Init_Debugging_Override or self.Debugging then
 		Msg("Initialized a new brush env: ", self, "\n")
 		Msg("ID is: ", self.ID, "\n")
@@ -34,7 +38,7 @@ function ENT:Initialize()
 		Msg("\n\n------------ START DUMP ------------\n\n")
 		PrintTable(self)
 		Msg("\n\n------------- END DUMP -------------\n\n")
-	end
+	end*/
 end
 
 function ENT:StartTouch(entity)
