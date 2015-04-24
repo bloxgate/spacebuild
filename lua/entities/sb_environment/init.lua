@@ -1,4 +1,4 @@
-include("Extensions/sv_brush_env_base_funcs.lua")
+include("extensions/sv_brush_env_base_funcs.lua")
 
 ENT.Base		= "base_brush"
 ENT.Type		= "brush"
