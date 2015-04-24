@@ -443,6 +443,12 @@ TOOL.Devices = {
                 skin = 0,
                 legacy = false,
             },
+            extra_small = {
+            	Name = "Extra Small"
+            	model = "models/ls_models/cloudstrifexiii/windmill/windmill_extra_small.mdl",
+            	skin = 0,
+            	legacy = false,
+    	    },
         },
     },
     generator_h_ramscoop = {
