@@ -14,9 +14,10 @@ function ENT:Initialize()
 		self:InitEnvBrush()
 	end
 	
-	if GAMEMODE and GAMEMODE.AddEnvironment then
-		GAMEMODE:AddEnvironment(self)
-	elseif not GAMEMODE then
+	//Spacebuild is no longer a gamemode
+	if SB and SB.AddEnvironment then
+		SB:AddEnvironment(self)
+	elseif not SB then
 		for i = 1, 9001 do -- For good measure. Hell, if it does happen then they deserve it!
 			Error("OMGAZ!!1 Yo3 No0t runizngz aA Gam3am0dez!\n")
 		end
