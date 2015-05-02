@@ -22,6 +22,9 @@ function ENT:Initialize()
     else
         self.Inputs = { { Name = "On" }, { Name = "Radius" }, { Name = "Gravity" }, { Name = "Max O2 level" } }
     end
+    if(GetConVar("SB_StaticEnvironment"):GetBool()) then
+        self:GetOwner():ChatPrint("This entity does not work with static environments")
+    end
 end
 
 function ENT:TurnOn()
