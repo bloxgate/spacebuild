@@ -18,9 +18,12 @@ function ENT:Initialize()
     if not (WireAddon == nil) then
         self.WireDebugName = self.PrintName
         self.Inputs = Wire_CreateInputs(self, { "On", "Radius", "Gravity", "Max O2 level" })
-        self.Outputs = Wire_CreateOutputs(self, { "On", "Oxygen-Level", "Temperature", "Gravity" })
+        self.Outputs = Wire_CreateOutputs(self, { "On", "Oxygen-Level", "Temperature", "Gravity", "Current Radius" })
     else
         self.Inputs = { { Name = "On" }, { Name = "Radius" }, { Name = "Gravity" }, { Name = "Max O2 level" } }
+    end
+    if(GetConVar("SB_StaticEnvironment"):GetBool()) then
+        self:GetOwner():ChatPrint("This entity does not work with static environments")
     end
 end
 
@@ -251,22 +254,22 @@ function ENT:Climate_Control()
                     local actual = self:Convert(1, 0, air)
                     self:ConsumeResource("oxygen", actual)
                     local left = self:SupplyResource("carbon dioxide", actual)
-                    self.environment:Convert(-1, 1, left)
+                    self.sbenvironment:Convert(-1, 1, left)
                 elseif self.sbenvironment.air.n > 0 then
                     local actual = self:Convert(2, 0, air)
                     self:ConsumeResource("oxygen", actual)
                     local left = self:SupplyResource("nitrogen", actual)
-                    self.environment:Convert(-1, 2, left)
+                    self.sbenvironment:Convert(-1, 2, left)
                 elseif self.sbenvironment.air.h > 0 then
                     local actual = self:Convert(3, 0, air)
                     self:ConsumeResource("oxygen", actual)
                     local left = self:SupplyResource("hydrogen", actual)
-                    self.environment:Convert(-1, 1, left)
+                    self.sbenvironment:Convert(-1, 1, left)
                 end
             elseif self.sbenvironment.air.o2 > self.sbenvironment.air.max then
                 local tmp = self.sbenvironment.air.o2 - self.sbenvironment.air.max
                 local left = self:SupplyResource("oxygen", tmp)
-                self.environment:Convert(-1, 0, left)
+                self.sbenvironment:Convert(-1, 0, left)
             end
             --Now let's check the pressure, if pressure is larger then 1 then we need some more power to keep the climate_controls environment stable. We don\' want any leaks do we?
             if pressure > 1 then
@@ -410,6 +413,7 @@ function ENT:Climate_Control()
         Wire_TriggerOutput(self, "Oxygen-Level", tonumber(self:GetO2Percentage()))
         Wire_TriggerOutput(self, "Temperature", tonumber(self.sbenvironment.temperature))
         Wire_TriggerOutput(self, "Gravity", tonumber(self.sbenvironment.gravity))
+        Wire_TriggerOutput(self, "Current Radius", tonumber(self.sbenvironment.size))
     end
 end
 
