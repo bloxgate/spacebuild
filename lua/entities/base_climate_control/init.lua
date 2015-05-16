@@ -254,7 +254,7 @@ function ENT:Climate_Control()
                     local actual = self:Convert(1, 0, air)
                     self:ConsumeResource("oxygen", actual)
                     local left = self:SupplyResource("carbon dioxide", actual)
-                    self.sbenvironment:Convert(-1, 1, left)
+                    self.sbenvironment:Convert(-1, 1, left) //Only this is still broken.
                 elseif self.sbenvironment.air.n > 0 then
                     local actual = self:Convert(2, 0, air)
                     self:ConsumeResource("oxygen", actual)
