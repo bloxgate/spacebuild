@@ -14,6 +14,7 @@ function ENT:Initialize()
     self.lastused = 0
     self.Mute = 0
     self.Multiplier = 1
+	self.incr = 1000
     if not (WireAddon == nil) then
         self.WireDebugName = self.PrintName
         self.Inputs = Wire_CreateInputs(self, { "On", "Overdrive", "Mute", "Multiplier" })
@@ -161,8 +162,41 @@ end
 function ENT:Think()
     self.BaseClass.Think(self)
     if (self.Active == 1) then
-        -- CODE TO IMPROVE A PLANET HERE!!
-    end
+		local SB = CAF.GetAddon("Spacebuild")
+        if (SB and SB.GetStatus() and self.environment and !(self.environment:IsSpace() or self.environment:IsStar()) then
+			self.energy = self:GetResourceAmount("energy")
+			if (self.energy >= 10000) then
+				local resources = { "oxygen", "carbon dioxide", "hydrogen", "nitrogen" }
+				if (table.HasValue(sb_resources, self.caf.custom.resource)) then
+					incr = incr * self.Multiplier
+					local usage = incr
+					if self.caf.custom.resource == "oxygen" then
+						usage = self.environment:Convert(0, -1, ainc)
+					elseif self.caf.custom.resource == "carbon dioxide" then
+						usage = self.environment:Convert(1, -1, ainc)
+					elseif self.caf.custom.resource == "hydrogen" then
+						usage = self.environment:Convert(3, -1, ainc)
+					elseif self.caf.custom.resource == "nitrogen" then
+						usage = self.environment:Convert(2, -1, ainc)
+					end
+					local left = self:SupplyResource(self.caf.custom.resource, usage)
+					if self.caf.custom.resource == "oxygen" then
+						self.environment:Convert(-1, 0, left)
+					elseif self.caf.custom.resource == "carbon dioxide" then
+						self.environment:Convert(-1, 1, left)
+					elseif self.caf.custom.resource == "hydrogen" then
+						self.environment:Convert(-1, 3, left)
+					elseif self.caf.custom.resource == "nitrogen" then
+						self.environment:Convert(-1, 2, left)
+					end
+				else
+					self:SupplyResource(self.caf.custom.resource, ainc)
+				end
+			else
+				self:TurnOff()
+			end
+		end
+	end
     self:NextThink(CurTime() + 1)
     return true
 end
